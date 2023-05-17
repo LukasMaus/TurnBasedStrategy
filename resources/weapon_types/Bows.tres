@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Weapon_Type" load_steps=2 format=3 uid="uid://b65wmyodtu8qm"]
+
+[ext_resource type="Script" path="res://resources/classes/Weapon_Type.gd" id="1_lmgl8"]
+
+[resource]
+script = ExtResource("1_lmgl8")
+weapon_type_name = "Bows"
+weapon_type_strength = "none"
+weapon_type_weakness = "none"

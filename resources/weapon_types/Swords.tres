@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Weapon_Type" load_steps=2 format=3 uid="uid://cbagnioudurbh"]
+
+[ext_resource type="Script" path="res://resources/classes/Weapon_Type.gd" id="1_ut3jp"]
+
+[resource]
+script = ExtResource("1_ut3jp")
+weapon_type_name = "Swords"
+weapon_type_strength = "Axes"
+weapon_type_weakness = "Lances"

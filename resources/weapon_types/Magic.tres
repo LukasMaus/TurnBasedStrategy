@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Weapon_Type" load_steps=2 format=3 uid="uid://bkqwv5hilimxv"]
+
+[ext_resource type="Script" path="res://resources/classes/Weapon_Type.gd" id="1_y8mro"]
+
+[resource]
+script = ExtResource("1_y8mro")
+weapon_type_name = "Magic"
+weapon_type_strength = "none"
+weapon_type_weakness = "none"

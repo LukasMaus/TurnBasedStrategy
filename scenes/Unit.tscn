@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3ewce766u103"]
+
+[ext_resource type="Script" path="res://scripts/Unit.gd" id="1_mksua"]
+[ext_resource type="Texture2D" uid="uid://djki0kb72yog5" path="res://assets/spritesheets/Soldier_0.png" id="2_6yhdl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_htmiq"]
+size = Vector2(16, 16)
+
+[node name="Unit" type="CharacterBody2D"]
+input_pickable = true
+script = ExtResource("1_mksua")
+team = null
+character_class = null
+hp_max = null
+hp_cur = null
+attack = null
+dexterity = null
+speed = null
+defence = null
+resistance = null
+movement = null
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(8, 8)
+texture = ExtResource("2_6yhdl")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_htmiq")
+
+[connection signal="input_event" from="." to="." method="_on_unit_clicked"]

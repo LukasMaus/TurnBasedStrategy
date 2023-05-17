@@ -1,0 +1,620 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvba342vqjumk"]
+
+[ext_resource type="Script" path="res://scripts/HUD.gd" id="1_drup8"]
+[ext_resource type="FontFile" uid="uid://cfxg5ndj31aby" path="res://assets/fonts/Kenney Mini Square Mono.ttf" id="2_jkjtb"]
+[ext_resource type="FontFile" uid="uid://ky30ssmy7wih" path="res://assets/fonts/Kenney Pixel Square.ttf" id="4_ftkd0"]
+
+[node name="HUD" type="CanvasLayer"]
+follow_viewport_enabled = true
+script = ExtResource("1_drup8")
+
+[node name="HB" type="HBoxContainer" parent="."]
+offset_left = -128.0
+offset_top = -48.0
+offset_right = 512.0
+offset_bottom = 312.0
+theme_override_constants/separation = 0
+
+[node name="LeftSideUI" type="VBoxContainer" parent="HB"]
+custom_minimum_size = Vector2(128, 360)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="UpperLeftUI" type="MarginContainer" parent="HB/LeftSideUI"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+
+[node name="MidLeftUI" type="MarginContainer" parent="HB/LeftSideUI"]
+custom_minimum_size = Vector2(0, 256)
+layout_mode = 2
+
+[node name="LowerLeftUI" type="MarginContainer" parent="HB/LeftSideUI"]
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="TerrainInfo" type="Panel" parent="HB/LeftSideUI/LowerLeftUI"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="MC" type="MarginContainer" parent="HB/LeftSideUI/LowerLeftUI/TerrainInfo"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 2
+
+[node name="VB" type="VBoxContainer" parent="HB/LeftSideUI/LowerLeftUI/TerrainInfo/MC"]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="TerrainName" type="Label" parent="HB/LeftSideUI/LowerLeftUI/TerrainInfo/MC/VB"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_jkjtb")
+theme_override_font_sizes/font_size = 16
+text = "grass"
+
+[node name="OtherValues" type="HBoxContainer" parent="HB/LeftSideUI/LowerLeftUI/TerrainInfo/MC/VB"]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="TerrainMovCost" type="Label" parent="HB/LeftSideUI/LowerLeftUI/TerrainInfo/MC/VB/OtherValues"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 8
+text = "Mov:"
+vertical_alignment = 1
+
+[node name="TerrainMovCostValue" type="Label" parent="HB/LeftSideUI/LowerLeftUI/TerrainInfo/MC/VB/OtherValues"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 8
+text = "1"
+vertical_alignment = 1
+
+[node name="TerrainSeperator" type="Label" parent="HB/LeftSideUI/LowerLeftUI/TerrainInfo/MC/VB/OtherValues"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 8
+text = "|"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TerrainBuff" type="Label" parent="HB/LeftSideUI/LowerLeftUI/TerrainInfo/MC/VB/OtherValues"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 8
+text = "Avoid:"
+vertical_alignment = 1
+
+[node name="TerrainBuffValue" type="Label" parent="HB/LeftSideUI/LowerLeftUI/TerrainInfo/MC/VB/OtherValues"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 8
+text = "+5"
+vertical_alignment = 1
+
+[node name="MidUI" type="VBoxContainer" parent="HB"]
+custom_minimum_size = Vector2(384, 360)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="UpperMidUI" type="MarginContainer" parent="HB/MidUI"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="InfoBar" type="HBoxContainer" parent="HB/MidUI/UpperMidUI"]
+layout_mode = 2
+
+[node name="PlayerInfo" type="Label" parent="HB/MidUI/UpperMidUI/InfoBar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("4_ftkd0")
+text = "Active Player"
+vertical_alignment = 1
+
+[node name="Spacing1" type="Label" parent="HB/MidUI/UpperMidUI/InfoBar"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("4_ftkd0")
+vertical_alignment = 1
+
+[node name="PlayerUnits" type="Label" parent="HB/MidUI/UpperMidUI/InfoBar"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("4_ftkd0")
+text = "P:"
+vertical_alignment = 1
+
+[node name="PlayerUnitsCount" type="Label" parent="HB/MidUI/UpperMidUI/InfoBar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("4_ftkd0")
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Spacing2" type="Label" parent="HB/MidUI/UpperMidUI/InfoBar"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("4_ftkd0")
+vertical_alignment = 1
+
+[node name="EnemyUnits" type="Label" parent="HB/MidUI/UpperMidUI/InfoBar"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("4_ftkd0")
+text = "E:"
+vertical_alignment = 1
+
+[node name="EnemyUnitsCount" type="Label" parent="HB/MidUI/UpperMidUI/InfoBar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("4_ftkd0")
+text = "12"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="GameWindow" type="MarginContainer" parent="HB/MidUI"]
+custom_minimum_size = Vector2(0, 256)
+layout_mode = 2
+
+[node name="LowerMidUI" type="MarginContainer" parent="HB/MidUI"]
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="ActionMenu" type="HBoxContainer" parent="HB/MidUI/LowerMidUI"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 5
+alignment = 1
+
+[node name="Weapon1" type="Button" parent="HB/MidUI/LowerMidUI/ActionMenu"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ftkd0")
+text = "Wpn 1"
+
+[node name="Weapon2" type="Button" parent="HB/MidUI/LowerMidUI/ActionMenu"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ftkd0")
+text = "Wpn 2"
+
+[node name="Heal" type="Button" parent="HB/MidUI/LowerMidUI/ActionMenu"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ftkd0")
+text = "Heal"
+
+[node name="HealUses" type="Label" parent="HB/MidUI/LowerMidUI/ActionMenu/Heal"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -15.0
+offset_top = -27.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("4_ftkd0")
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Wait" type="Button" parent="HB/MidUI/LowerMidUI/ActionMenu"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ftkd0")
+text = "Wait"
+
+[node name="RightSideUI" type="VBoxContainer" parent="HB"]
+custom_minimum_size = Vector2(128, 360)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="UpperRightUI" type="MarginContainer" parent="HB/RightSideUI"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+
+[node name="MidRightUI" type="MarginContainer" parent="HB/RightSideUI"]
+custom_minimum_size = Vector2(0, 256)
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="UnitInfo" type="Panel" parent="HB/RightSideUI/MidRightUI"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 9
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 9
+theme_override_constants/margin_bottom = 8
+
+[node name="VB" type="VBoxContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Class" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 16
+text = "Class"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Weapon" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 8
+text = "Weapon"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Seperator" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 8
+text = "---------------"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HP" type="HBoxContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="HPCurrent" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/HP"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 16
+text = "12"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Seperator" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/HP"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 16
+text = "/"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HPMax" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/HP"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 16
+text = "36"
+vertical_alignment = 1
+
+[node name="HP" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/HP"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 16
+text = "HP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Stats" type="MarginContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="StatName" type="VBoxContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+
+[node name="Atk" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer/StatName"]
+custom_minimum_size = Vector2(25, 15)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 8
+text = "Atk:"
+vertical_alignment = 1
+
+[node name="Dex" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer/StatName"]
+custom_minimum_size = Vector2(25, 15)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 8
+text = "Dex:"
+vertical_alignment = 1
+
+[node name="Spd" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer/StatName"]
+custom_minimum_size = Vector2(25, 15)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 8
+text = "Spd:"
+vertical_alignment = 1
+
+[node name="Def" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer/StatName"]
+custom_minimum_size = Vector2(25, 15)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 8
+text = "Def:"
+vertical_alignment = 1
+
+[node name="Res" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer/StatName"]
+custom_minimum_size = Vector2(25, 15)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 8
+text = "Res:"
+vertical_alignment = 1
+
+[node name="Mov" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer/StatName"]
+custom_minimum_size = Vector2(25, 15)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 8
+text = "Mov:"
+vertical_alignment = 1
+
+[node name="Range" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer/StatName"]
+custom_minimum_size = Vector2(25, 15)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 8
+text = "Ran:"
+vertical_alignment = 1
+
+[node name="StatUnit" type="VBoxContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Atk" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer/StatUnit"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(25, 15)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 8
+text = "20"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Dex" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer/StatUnit"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(25, 15)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 8
+text = "14"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spd" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer/StatUnit"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(25, 15)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 8
+text = "16"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Def" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer/StatUnit"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(25, 15)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 8
+text = "12"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Res" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer/StatUnit"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(25, 15)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 8
+text = "8"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Mov" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer/StatUnit"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(25, 15)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 8
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Range" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer/StatUnit"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(25, 15)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 8
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatBonus" type="VBoxContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="AtkBonus" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer/StatBonus"]
+unique_name_in_owner = true
+modulate = Color(0, 0.803922, 0.219608, 1)
+custom_minimum_size = Vector2(25, 15)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 8
+text = "+8"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DexBonus" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer/StatBonus"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(25, 15)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 8
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpdBonus" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer/StatBonus"]
+unique_name_in_owner = true
+modulate = Color(0.87451, 0, 0.12549, 1)
+custom_minimum_size = Vector2(25, 15)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 8
+text = "-5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DefBonus" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer/StatBonus"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(25, 15)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 8
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ResBonus" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer/StatBonus"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(25, 15)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 8
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MovBonus" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer/StatBonus"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(25, 15)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 8
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RangeBonus" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer/StatBonus"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(25, 15)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 8
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LowerRightUI" type="MarginContainer" parent="HB/RightSideUI"]
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="EndTurn" type="Button" parent="HB/RightSideUI/LowerRightUI"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ftkd0")
+text = "End Turn"
+
+[connection signal="pressed" from="HB/MidUI/LowerMidUI/ActionMenu/Heal" to="." method="_on_heal_pressed"]
+[connection signal="pressed" from="HB/MidUI/LowerMidUI/ActionMenu/Wait" to="." method="_on_wait_pressed"]
+[connection signal="pressed" from="HB/RightSideUI/LowerRightUI/EndTurn" to="." method="_on_end_turn_pressed"]

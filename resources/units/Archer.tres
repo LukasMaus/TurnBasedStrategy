@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Unit_Class" load_steps=2 format=3 uid="uid://q8kljhd1pget"]
+
+[ext_resource type="Script" path="res://resources/classes/Unit_Class.gd" id="1_et0es"]
+
+[resource]
+script = ExtResource("1_et0es")
+unit_name = ""
+base_hp = 0
+base_atk = 0
+base_dex = 0
+base_spd = 0
+base_def = 0
+base_res = 0
+movement = 0
