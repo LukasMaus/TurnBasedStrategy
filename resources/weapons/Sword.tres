@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=4 format=3 uid="uid://5j8c5wbylkap"]
+
+[ext_resource type="Script" path="res://resources/classes/Weapon.gd" id="1_gvdrp"]
+[ext_resource type="Resource" uid="uid://cv5swqcavpmj4" path="res://resources/damage_types/physical.tres" id="1_ws15r"]
+[ext_resource type="Resource" uid="uid://cbagnioudurbh" path="res://resources/weapon_types/Swords.tres" id="3_mg8qb"]
+
+[resource]
+script = ExtResource("1_gvdrp")
+weapon_name = "Sword"
+weapon_type = ExtResource("3_mg8qb")
+attack = 9
+hit_chance = 90
+crit_chance = 5
+weight = 0
+damage_type = ExtResource("1_ws15r")
+min_range = 1
+max_range = 1

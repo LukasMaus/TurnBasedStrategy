@@ -1,14 +1,22 @@
-[gd_resource type="Resource" script_class="Unit_Class" load_steps=2 format=3 uid="uid://dql3d6267g3st"]
+[gd_resource type="Resource" script_class="Unit_Class" load_steps=6 format=3 uid="uid://dql3d6267g3st"]
 
 [ext_resource type="Script" path="res://resources/classes/Unit_Class.gd" id="1_jyvoa"]
+[ext_resource type="Texture2D" uid="uid://cgf78pm13u4da" path="res://assets/spritesheets/Lancer_1.png" id="2_0jprg"]
+[ext_resource type="Texture2D" uid="uid://damv1exfqb0x5" path="res://assets/spritesheets/Lancer_0.png" id="3_08iig"]
+[ext_resource type="Resource" uid="uid://oro1bogeigh5" path="res://resources/weapons/Lance.tres" id="4_mtqbp"]
+[ext_resource type="Resource" uid="uid://be80aqup15tmu" path="res://resources/weapons/Javelin.tres" id="5_caqtf"]
 
 [resource]
 script = ExtResource("1_jyvoa")
-unit_name = ""
-base_hp = 0
-base_atk = 0
-base_dex = 0
-base_spd = 0
-base_def = 0
-base_res = 0
-movement = 0
+unit_name = "Lancer"
+base_hp = 44
+base_atk = 21
+base_dex = 16
+base_spd = 6
+base_def = 21
+base_res = 4
+movement = 3
+weapon_1 = ExtResource("4_mtqbp")
+weapon_2 = ExtResource("5_caqtf")
+texture_player = ExtResource("3_08iig")
+texture_enemy = ExtResource("2_0jprg")

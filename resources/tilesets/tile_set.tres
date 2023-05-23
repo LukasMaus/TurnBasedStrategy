@@ -1,7 +1,9 @@
-[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://bqmum87greqec"]
+[gd_resource type="TileSet" load_steps=9 format=3 uid="uid://bqmum87greqec"]
 
 [ext_resource type="Texture2D" uid="uid://cicirqr5dxgi8" path="res://assets/tilesets/FullTileset.png" id="1_5ishv"]
 [ext_resource type="Texture2D" uid="uid://ddoj5ba5tbje7" path="res://assets/ui/RangerFinderTile_Blue_50%Opacity.png" id="2_rmmtu"]
+[ext_resource type="Texture2D" uid="uid://egsxuka17g6c" path="res://assets/ui/RangerFinderTile_Red_Solid.png" id="3_c4upi"]
+[ext_resource type="Texture2D" uid="uid://ew8pgv80ya8u" path="res://assets/ui/RangerFinderTile_Green_Solid.png" id="4_ejnm6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gq8cp"]
 texture = ExtResource("1_5ishv")
@@ -1101,6 +1103,40 @@ texture = ExtResource("2_rmmtu")
 12:0/0 = 0
 13:0/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_teybl"]
+texture = ExtResource("3_c4upi")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+9:0/0 = 0
+10:0/0 = 0
+11:0/0 = 0
+12:0/0 = 0
+13:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jh0r7"]
+texture = ExtResource("4_ejnm6")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+9:0/0 = 0
+10:0/0 = 0
+11:0/0 = 0
+12:0/0 = 0
+13:0/0 = 0
+
 [resource]
 terrain_set_0/mode = 2
 terrain_set_0/terrain_0/name = "Ground"
@@ -1128,3 +1164,5 @@ custom_data_layer_3/name = "buff_avoid"
 custom_data_layer_3/type = 1
 sources/0 = SubResource("TileSetAtlasSource_gq8cp")
 sources/1 = SubResource("TileSetAtlasSource_yg5jh")
+sources/2 = SubResource("TileSetAtlasSource_teybl")
+sources/3 = SubResource("TileSetAtlasSource_jh0r7")

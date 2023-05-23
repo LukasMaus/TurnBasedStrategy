@@ -9,7 +9,7 @@ var astar_grid
 func _ready():
 	_initialize_astargrid()
 	
-	Eventmanager.unitMoveStart.connect(_on_unit_moved)
+	Eventmanager.unitMove.connect(_on_unit_moved)
 
 func _initialize_astargrid():
 	astar_grid = AStarGrid2D.new()
@@ -70,7 +70,8 @@ func _toggle_movement_preview(visibility_state : bool):
 		movement_preview.points = []
 	movement_preview.visible = visibility_state
 
-func _calculate_reachable_tiles(unit):
+func _calculate_reachable_tiles(unit : Unit):
+	_clear_reachable_tiles()
 	var unit_tile = unit.unit_tile
 	for x in range(-unit.movement, unit.movement + 1):
 		for y in range(-unit.movement, unit.movement + 1):
@@ -99,6 +100,35 @@ func _calculate_reachable_tiles(unit):
 					if path_cost <= unit.movement:
 						set_cell(2, end_path_tile, 1, Vector2i(0, 0))
 
+func _calculate_targetable_tiles(unit : Unit):
+	_toggle_movement_preview(false)
+	_clear_reachable_tiles()
+	var unit_tile = unit.unit_tile
+	var min_range = unit.equipped_weapon.min_range
+	var max_range = unit.equipped_weapon.max_range
+	var preview_tile_id
+	
+	if unit.equipped_weapon.weapon_type.target == "enemy":
+		preview_tile_id = 2
+	else:
+		preview_tile_id = 3
+		
+	for x in range(-max_range, max_range + 1):
+		for y in range(-max_range, max_range + 1):
+			var end_path_tile = unit_tile + Vector2(x, y)
+			#tile is more tiles away then max_range
+			if abs(x) + abs(y) > max_range:
+				continue
+			#tile is fewer tiles away then min_range
+			elif abs(x) + abs(y) < min_range:
+				continue
+			#tile is out of bounds
+			elif unit_tile.x + x < 0 or unit_tile.x + x >= map_size.x or unit_tile.y + y < 0 or unit_tile.y + y >= map_size.y: 
+				#print("Tile " + str(end_path_tile) + " is out of bounds.")
+				continue
+			else:
+				set_cell(2, end_path_tile, preview_tile_id, Vector2i(0, 0))
+
 #checks if there is a  movement_preview tile on the current tile
 func _check_for_reachable_tile(tile):
 	if get_cell_source_id(2, tile) == 1:
@@ -109,9 +139,15 @@ func _check_for_reachable_tile(tile):
 func _clear_reachable_tiles():
 	clear_layer(2)
 
-func _on_unit_moved():
-	_toggle_movement_preview(false)
+func _clear_movement_preview():
 	_clear_reachable_tiles()
+	_toggle_movement_preview(false)
+	
+func _on_unit_moved(move_state):
+	if move_state == true:
+		_toggle_movement_preview(false)
+	else:
+		_clear_reachable_tiles()
 
 func _get_tile_information(tile_id):
 	var map_layer
@@ -123,8 +159,10 @@ func _get_tile_information(tile_id):
 		else:
 			print("No tile found on position: " + str(tile_id))
 	var tile_data = get_cell_tile_data(map_layer, tile_id)
-	var tile_name = tile_data.get_custom_data("name")
-	var movement_cost = tile_data.get_custom_data("movement_cost")
-	var buff_defence = tile_data.get_custom_data("buff_defence")
-	var buff_avoid = tile_data.get_custom_data("buff_avoid")
-	return [tile_name, movement_cost, buff_defence, buff_avoid]
+	var terrain_info = Terrain_Info.new()
+	terrain_info.tile_id = tile_id
+	terrain_info.tile_name = tile_data.get_custom_data("name")
+	terrain_info.movement_cost = tile_data.get_custom_data("movement_cost")
+	terrain_info.buff_defence = tile_data.get_custom_data("buff_defence")
+	terrain_info.buff_avoid = tile_data.get_custom_data("buff_avoid")
+	return terrain_info

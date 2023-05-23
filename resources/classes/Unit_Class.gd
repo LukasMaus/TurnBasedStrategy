@@ -50,12 +50,6 @@ class_name Unit_Class
 	set(value):
 		movement = value
 
-@export var weapon_type : Weapon_Type :
-	get:
-		return weapon_type
-	set(value):
-		weapon_type = value
-
 @export var weapon_1 : Weapon :
 	get:
 		return weapon_1
@@ -64,9 +58,9 @@ class_name Unit_Class
 
 @export var weapon_2 : Weapon :
 	get:
-		return weapon_1
+		return weapon_2
 	set(value):
-		weapon_1 = value
+		weapon_2 = value
 
 @export var texture_player : Texture :
 	get:

@@ -5,5 +5,6 @@
 [resource]
 script = ExtResource("1_kmqry")
 weapon_type_name = "Lances"
+target = "enemy"
 weapon_type_strength = "Swords"
 weapon_type_weakness = "Axes"

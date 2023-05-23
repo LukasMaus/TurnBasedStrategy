@@ -1,8 +1,12 @@
 extends Node
 
-signal selectUnit(unit)
+signal clickedUnit(unit)
 
 signal unselectUnit()
+
+signal hoverUnit(unit)
+
+signal unhoverUnit(unit)
 
 signal endTurn()
 
@@ -12,8 +16,12 @@ signal playerTurnStarted()
 
 signal enemyTurnStarted()
 
-signal unitMoveStart()
+signal unitMove(state : bool)
 
-signal unitMoveEnd()
+signal unitKilled(unit)
+
+signal setAttackMode(state : bool)
 
 signal newUnitPosition(player, old_position, new_position)
+
+signal unitStatsUpdated(unit)

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=4 format=3 uid="uid://dawmoksas6rut"]
+
+[ext_resource type="Resource" uid="uid://cv5swqcavpmj4" path="res://resources/damage_types/physical.tres" id="1_drvk7"]
+[ext_resource type="Script" path="res://resources/classes/Weapon.gd" id="1_i44xp"]
+[ext_resource type="Resource" uid="uid://cbagnioudurbh" path="res://resources/weapon_types/Swords.tres" id="3_knpnn"]
+
+[resource]
+script = ExtResource("1_i44xp")
+weapon_name = "Katana"
+weapon_type = ExtResource("3_knpnn")
+attack = 6
+hit_chance = 80
+crit_chance = 20
+weight = 0
+damage_type = ExtResource("1_drvk7")
+min_range = 1
+max_range = 1

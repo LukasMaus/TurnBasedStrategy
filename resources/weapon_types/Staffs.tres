@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Weapon_Type" load_steps=2 format=3 uid="uid://cj0457folrluj"]
+
+[ext_resource type="Script" path="res://resources/classes/Weapon_Type.gd" id="1_t0xue"]
+
+[resource]
+script = ExtResource("1_t0xue")
+weapon_type_name = "Staff"
+target = "ally"
+weapon_type_strength = "none"
+weapon_type_weakness = "none"

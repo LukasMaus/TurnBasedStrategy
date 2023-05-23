@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=4 format=3 uid="uid://oro1bogeigh5"]
+
+[ext_resource type="Script" path="res://resources/classes/Weapon.gd" id="1_6n6at"]
+[ext_resource type="Resource" uid="uid://cv5swqcavpmj4" path="res://resources/damage_types/physical.tres" id="1_465i5"]
+[ext_resource type="Resource" uid="uid://dtxcpo45mirf4" path="res://resources/weapon_types/Lances.tres" id="3_bjk61"]
+
+[resource]
+script = ExtResource("1_6n6at")
+weapon_name = "Lance"
+weapon_type = ExtResource("3_bjk61")
+attack = 11
+hit_chance = 80
+crit_chance = 0
+weight = 0
+damage_type = ExtResource("1_465i5")
+min_range = 1
+max_range = 1

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=4 format=3 uid="uid://dlbcosj88oa7v"]
+
+[ext_resource type="Script" path="res://resources/classes/Weapon.gd" id="1_dhhk3"]
+[ext_resource type="Resource" uid="uid://cv5swqcavpmj4" path="res://resources/damage_types/physical.tres" id="1_vxh2s"]
+[ext_resource type="Resource" uid="uid://cky8hghsm6bhp" path="res://resources/weapon_types/Axes.tres" id="3_f1gy1"]
+
+[resource]
+script = ExtResource("1_dhhk3")
+weapon_name = "Cleaver"
+weapon_type = ExtResource("3_f1gy1")
+attack = 20
+hit_chance = 70
+crit_chance = 10
+weight = 5
+damage_type = ExtResource("1_vxh2s")
+min_range = 1
+max_range = 1

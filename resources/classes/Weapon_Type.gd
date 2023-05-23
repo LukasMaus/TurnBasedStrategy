@@ -8,6 +8,12 @@ class_name Weapon_Type
 	set(value):
 		weapon_type_name = value
 
+@export var target : String :
+	get:
+		return target
+	set(value):
+		target = value
+
 #declaring the weapon strength as a weapon_type data type results in a bug with recursion
 #more information on Godot Github #73589
 @export var weapon_type_strength : String :

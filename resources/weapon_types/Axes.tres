@@ -5,5 +5,6 @@
 [resource]
 script = ExtResource("1_5r81k")
 weapon_type_name = "Axes"
+target = "enemy"
 weapon_type_strength = "Lances"
-weapon_type_weakness = "Swords"
+weapon_type_weakness = "Sword"

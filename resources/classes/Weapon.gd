@@ -8,7 +8,7 @@ class_name Weapon
 	set(value):
 		weapon_name = value
 
-@export var weapon_type : String :
+@export var weapon_type : Weapon_Type :
 	get:
 		return weapon_type
 	set(value):
@@ -26,13 +26,19 @@ class_name Weapon
 	set(value):
 		hit_chance = value
 
+@export var crit_chance : int :
+	get:
+		return crit_chance
+	set(value):
+		crit_chance = value
+
 @export var weight : int :
 	get:
 		return weight
 	set(value):
 		weight = value
 
-@export var damage_type : String :
+@export var damage_type : Damage_Type :
 	get:
 		return damage_type
 	set(value):
@@ -49,9 +55,3 @@ class_name Weapon
 		return max_range
 	set(value):
 		max_range = value
-
-@export var target : String :
-	get:
-		return target
-	set(value):
-		target = value

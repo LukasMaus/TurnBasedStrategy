@@ -1,14 +1,22 @@
-[gd_resource type="Resource" script_class="Unit_Class" load_steps=2 format=3 uid="uid://cry7nklhoabj6"]
+[gd_resource type="Resource" script_class="Unit_Class" load_steps=6 format=3 uid="uid://cry7nklhoabj6"]
 
 [ext_resource type="Script" path="res://resources/classes/Unit_Class.gd" id="1_50ci7"]
+[ext_resource type="Texture2D" uid="uid://duv35ulax2oij" path="res://assets/spritesheets/Mage_1.png" id="2_0f4w0"]
+[ext_resource type="Texture2D" uid="uid://coaqrnwb04xbu" path="res://assets/spritesheets/Mage_0.png" id="3_dcaeh"]
+[ext_resource type="Resource" uid="uid://8s68ng1vtwwj" path="res://resources/weapons/Fire.tres" id="4_pnylp"]
+[ext_resource type="Resource" uid="uid://bqfy1vlg252dt" path="res://resources/weapons/Heal.tres" id="5_sidt4"]
 
 [resource]
 script = ExtResource("1_50ci7")
-unit_name = ""
-base_hp = 0
-base_atk = 0
-base_dex = 0
-base_spd = 0
-base_def = 0
-base_res = 0
-movement = 0
+unit_name = "Mage"
+base_hp = 29
+base_atk = 20
+base_dex = 18
+base_spd = 16
+base_def = 5
+base_res = 20
+movement = 4
+weapon_1 = ExtResource("4_pnylp")
+weapon_2 = ExtResource("5_sidt4")
+texture_player = ExtResource("3_dcaeh")
+texture_enemy = ExtResource("2_0f4w0")

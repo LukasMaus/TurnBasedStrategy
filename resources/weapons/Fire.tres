@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=4 format=3 uid="uid://8s68ng1vtwwj"]
+
+[ext_resource type="Resource" uid="uid://bdou5jte6g5ot" path="res://resources/damage_types/magical.tres" id="1_0si2m"]
+[ext_resource type="Script" path="res://resources/classes/Weapon.gd" id="1_qkbaf"]
+[ext_resource type="Resource" uid="uid://bkqwv5hilimxv" path="res://resources/weapon_types/Magic.tres" id="3_gtpe1"]
+
+[resource]
+script = ExtResource("1_qkbaf")
+weapon_name = "Fire"
+weapon_type = ExtResource("3_gtpe1")
+attack = 11
+hit_chance = 80
+crit_chance = 0
+weight = 0
+damage_type = ExtResource("1_0si2m")
+min_range = 1
+max_range = 2

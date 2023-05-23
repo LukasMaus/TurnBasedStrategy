@@ -1,0 +1,9 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://c7ohq3l00nmhq"]
+
+[ext_resource type="FontFile" uid="uid://ck5gbc8obcvga" path="res://assets/fonts/Kenney Mini Square.ttf" id="1_6ainv"]
+[ext_resource type="FontFile" uid="uid://ky30ssmy7wih" path="res://assets/fonts/Kenney Pixel Square.ttf" id="1_rliyl"]
+
+[resource]
+default_font = ExtResource("1_rliyl")
+TooltipLabel/font_sizes/font_size = 8
+TooltipLabel/fonts/font = ExtResource("1_6ainv")

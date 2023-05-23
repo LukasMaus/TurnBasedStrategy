@@ -9,16 +9,6 @@ size = Vector2(16, 16)
 [node name="Unit" type="CharacterBody2D"]
 input_pickable = true
 script = ExtResource("1_mksua")
-team = null
-character_class = null
-hp_max = null
-hp_cur = null
-attack = null
-dexterity = null
-speed = null
-defence = null
-resistance = null
-movement = null
 
 [node name="Sprite" type="Sprite2D" parent="."]
 position = Vector2(8, 8)
@@ -31,3 +21,5 @@ position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_htmiq")
 
 [connection signal="input_event" from="." to="." method="_on_unit_clicked"]
+[connection signal="mouse_entered" from="." to="." method="_on_unit_hovered"]
+[connection signal="mouse_exited" from="." to="." method="_on_unit_unhovered"]

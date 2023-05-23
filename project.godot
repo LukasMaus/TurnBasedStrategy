@@ -17,7 +17,6 @@ config/features=PackedStringArray("4.0", "Forward Plus")
 [autoload]
 
 Eventmanager="*res://scripts/singletons/Eventmanager.gd"
-GameData="*res://scripts/singletons/GameData.gd"
 Globals="*res://scripts/singletons/Globals.gd"
 
 [display]

@@ -1,6 +1,6 @@
 extends Node
 
-#switches to classes instead of dictionary
+#switched to classes instead of dictionary
 #GameData is not used anymore
 var class_data = {
 	"Soldier":

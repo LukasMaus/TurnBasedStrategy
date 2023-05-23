@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://dvba342vqjumk"]
+[gd_scene load_steps=7 format=3 uid="uid://dvba342vqjumk"]
 
 [ext_resource type="Script" path="res://scripts/HUD.gd" id="1_drup8"]
+[ext_resource type="Theme" uid="uid://c7ohq3l00nmhq" path="res://resources/themes/hud_theme.tres" id="2_apr58"]
 [ext_resource type="FontFile" uid="uid://cfxg5ndj31aby" path="res://assets/fonts/Kenney Mini Square Mono.ttf" id="2_jkjtb"]
+[ext_resource type="Texture2D" uid="uid://be5coc3v4xysx" path="res://assets/ui/HPbar.jpg" id="3_7laax"]
+[ext_resource type="FontFile" uid="uid://ck5gbc8obcvga" path="res://assets/fonts/Kenney Mini Square.ttf" id="4_6p7e5"]
 [ext_resource type="FontFile" uid="uid://ky30ssmy7wih" path="res://assets/fonts/Kenney Pixel Square.ttf" id="4_ftkd0"]
 
 [node name="HUD" type="CanvasLayer"]
@@ -13,6 +16,7 @@ offset_left = -128.0
 offset_top = -48.0
 offset_right = 512.0
 offset_bottom = 312.0
+theme = ExtResource("2_apr58")
 theme_override_constants/separation = 0
 
 [node name="LeftSideUI" type="VBoxContainer" parent="HB"]
@@ -27,6 +31,308 @@ layout_mode = 2
 [node name="MidLeftUI" type="MarginContainer" parent="HB/LeftSideUI"]
 custom_minimum_size = Vector2(0, 256)
 layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="CombatInfo" type="Panel" parent="HB/LeftSideUI/MidLeftUI"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="MC" type="MarginContainer" parent="HB/LeftSideUI/MidLeftUI/CombatInfo"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 9
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 9
+theme_override_constants/margin_bottom = 8
+
+[node name="VB" type="VBoxContainer" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="InitiatingUnitName" type="Label" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+text = "Initiate"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Seperator1" type="Label" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "----------"
+horizontal_alignment = 2
+
+[node name="HB" type="HBoxContainer" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="VB" type="VBoxContainer" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="HP" type="HBoxContainer" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="PlayerHP" type="Label" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB/HP"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(26, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "30"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Seperator" type="Label" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB/HP"]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 2
+text = "|"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Descriptor" type="Label" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB/HP"]
+custom_minimum_size = Vector2(26, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "HP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Seperator2" type="Label" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB/HP"]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 2
+text = "|"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EnemyHP" type="Label" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB/HP"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(26, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "45"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HPBar" type="TextureProgressBar" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90, 4)
+layout_mode = 2
+value = 50.0
+texture_under = ExtResource("3_7laax")
+texture_progress = ExtResource("3_7laax")
+tint_under = Color(1, 0, 0, 1)
+tint_progress = Color(0, 0, 1, 1)
+
+[node name="Atk" type="HBoxContainer" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="PlayerAtk" type="Label" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB/Atk"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(26, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = " 30"
+vertical_alignment = 1
+
+[node name="PlayerFollowUp" type="Label" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB/Atk/PlayerAtk"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -10.0
+offset_bottom = 13.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("4_6p7e5")
+theme_override_font_sizes/font_size = 8
+text = "x2"
+horizontal_alignment = 2
+
+[node name="Seperator" type="Label" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB/Atk"]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 2
+text = "|"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Descriptor" type="Label" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB/Atk"]
+custom_minimum_size = Vector2(26, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Atk"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Seperator2" type="Label" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB/Atk"]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 2
+text = "|"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EnemyAtk" type="Label" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB/Atk"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(26, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "45"
+vertical_alignment = 1
+
+[node name="EnemyFollowUp" type="Label" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB/Atk/EnemyAtk"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -10.0
+offset_bottom = 13.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("4_6p7e5")
+theme_override_font_sizes/font_size = 8
+text = "x2"
+horizontal_alignment = 2
+
+[node name="AtkBar" type="TextureProgressBar" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90, 4)
+layout_mode = 2
+value = 50.0
+texture_under = ExtResource("3_7laax")
+texture_progress = ExtResource("3_7laax")
+tint_under = Color(1, 0, 0, 1)
+tint_progress = Color(0, 0, 1, 1)
+
+[node name="Hit" type="HBoxContainer" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="PlayerHit" type="Label" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB/Hit"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(26, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "30"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Seperator" type="Label" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB/Hit"]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 2
+text = "|"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Descriptor" type="Label" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB/Hit"]
+custom_minimum_size = Vector2(26, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Hit"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Seperator2" type="Label" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB/Hit"]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 2
+text = "|"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EnemyHit" type="Label" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB/Hit"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(26, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "45"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HitBar" type="TextureProgressBar" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90, 4)
+layout_mode = 2
+value = 50.0
+texture_under = ExtResource("3_7laax")
+texture_progress = ExtResource("3_7laax")
+tint_under = Color(1, 0, 0, 1)
+tint_progress = Color(0, 0, 1, 1)
+
+[node name="Crit" type="HBoxContainer" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="PlayerCrit" type="Label" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB/Crit"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(26, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "30"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Seperator" type="Label" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB/Crit"]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 2
+text = "|"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Descriptor" type="Label" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB/Crit"]
+custom_minimum_size = Vector2(26, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Crit"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Seperator2" type="Label" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB/Crit"]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 2
+text = "|"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EnemyCrit" type="Label" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB/Crit"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(26, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "45"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CritBar" type="TextureProgressBar" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90, 4)
+layout_mode = 2
+value = 50.0
+texture_under = ExtResource("3_7laax")
+texture_progress = ExtResource("3_7laax")
+tint_under = Color(1, 0, 0, 1)
+tint_progress = Color(0, 0, 1, 1)
+
+[node name="Seperator2" type="Label" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "----------"
+
+[node name="TargetUnitName" type="Label" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 8
+text = "Target"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="LowerLeftUI" type="MarginContainer" parent="HB/LeftSideUI"]
 custom_minimum_size = Vector2(0, 56)
@@ -131,6 +437,8 @@ custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 1
+tooltip_text = "Shows which player is currently acting."
+mouse_filter = 0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("4_ftkd0")
@@ -147,9 +455,17 @@ theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("4_ftkd0")
 vertical_alignment = 1
 
-[node name="PlayerUnits" type="Label" parent="HB/MidUI/UpperMidUI/InfoBar"]
+[node name="Panel1" type="Panel" parent="HB/MidUI/UpperMidUI/InfoBar"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+tooltip_text = "Shows how many units the player has remaining on the map."
+
+[node name="PlayerUnits" type="Label" parent="HB/MidUI/UpperMidUI/InfoBar/Panel1"]
 unique_name_in_owner = true
 layout_mode = 2
+offset_left = 4.0
+offset_right = 20.0
+offset_bottom = 28.0
 size_flags_horizontal = 8
 size_flags_vertical = 1
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -158,10 +474,13 @@ theme_override_fonts/font = ExtResource("4_ftkd0")
 text = "P:"
 vertical_alignment = 1
 
-[node name="PlayerUnitsCount" type="Label" parent="HB/MidUI/UpperMidUI/InfoBar"]
+[node name="PlayerUnitsCount" type="Label" parent="HB/MidUI/UpperMidUI/InfoBar/Panel1"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
+offset_left = 24.0
+offset_right = 48.0
+offset_bottom = 28.0
 size_flags_horizontal = 8
 size_flags_vertical = 1
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -181,9 +500,17 @@ theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("4_ftkd0")
 vertical_alignment = 1
 
-[node name="EnemyUnits" type="Label" parent="HB/MidUI/UpperMidUI/InfoBar"]
+[node name="Panel2" type="Panel" parent="HB/MidUI/UpperMidUI/InfoBar"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+tooltip_text = "Shows how many units the enemy has remaining on the map."
+
+[node name="EnemyUnits" type="Label" parent="HB/MidUI/UpperMidUI/InfoBar/Panel2"]
 unique_name_in_owner = true
 layout_mode = 2
+offset_left = 4.0
+offset_right = 20.0
+offset_bottom = 28.0
 size_flags_horizontal = 8
 size_flags_vertical = 1
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -192,10 +519,13 @@ theme_override_fonts/font = ExtResource("4_ftkd0")
 text = "E:"
 vertical_alignment = 1
 
-[node name="EnemyUnitsCount" type="Label" parent="HB/MidUI/UpperMidUI/InfoBar"]
+[node name="EnemyUnitsCount" type="Label" parent="HB/MidUI/UpperMidUI/InfoBar/Panel2"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
+offset_left = 24.0
+offset_right = 48.0
+offset_bottom = 28.0
 size_flags_horizontal = 8
 size_flags_vertical = 1
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -227,6 +557,8 @@ alignment = 1
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
+tooltip_text = "Unit equips %weapon%:
+%weapon_stats%"
 theme_override_fonts/font = ExtResource("4_ftkd0")
 text = "Wpn 1"
 
@@ -234,6 +566,8 @@ text = "Wpn 1"
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
+tooltip_text = "Unit equips %weapon%:
+%weapon_stats%"
 theme_override_fonts/font = ExtResource("4_ftkd0")
 text = "Wpn 2"
 
@@ -241,6 +575,7 @@ text = "Wpn 2"
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
+tooltip_text = "Unit heals itself for %healamount% HP."
 theme_override_fonts/font = ExtResource("4_ftkd0")
 text = "Heal"
 
@@ -265,6 +600,7 @@ vertical_alignment = 2
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
+tooltip_text = "Unit ends its turn."
 theme_override_fonts/font = ExtResource("4_ftkd0")
 text = "Wait"
 
@@ -291,7 +627,7 @@ theme_override_constants/margin_bottom = 10
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo"]
+[node name="MC" type="MarginContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -303,30 +639,34 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 9
 theme_override_constants/margin_bottom = 8
 
-[node name="VB" type="VBoxContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer"]
+[node name="VB" type="VBoxContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Class" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB"]
+[node name="Class" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0
+tooltip_text = "Class of the unit."
+mouse_filter = 0
 theme_override_fonts/font = ExtResource("4_ftkd0")
 theme_override_font_sizes/font_size = 16
 text = "Class"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Weapon" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB"]
+[node name="Weapon" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB"]
 unique_name_in_owner = true
 layout_mode = 2
+tooltip_text = "Currently equipped weapon."
+mouse_filter = 0
 theme_override_fonts/font = ExtResource("4_ftkd0")
 theme_override_font_sizes/font_size = 8
 text = "Weapon"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Seperator" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB"]
+[node name="Seperator" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_fonts/font = ExtResource("4_ftkd0")
@@ -335,11 +675,12 @@ text = "---------------"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HP" type="HBoxContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB"]
+[node name="HP" type="HBoxContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB"]
 layout_mode = 2
+tooltip_text = "Current and maximum hit points of a unit."
 theme_override_constants/separation = 0
 
-[node name="HPCurrent" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/HP"]
+[node name="HPCurrent" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/HP"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
@@ -350,7 +691,7 @@ text = "12"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Seperator" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/HP"]
+[node name="Seperator" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/HP"]
 custom_minimum_size = Vector2(4, 0)
 layout_mode = 2
 size_flags_horizontal = 6
@@ -360,7 +701,7 @@ text = "/"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HPMax" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/HP"]
+[node name="HPMax" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/HP"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
@@ -370,7 +711,7 @@ theme_override_font_sizes/font_size = 16
 text = "36"
 vertical_alignment = 1
 
-[node name="HP" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/HP"]
+[node name="HP" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/HP"]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 size_flags_horizontal = 10
@@ -380,7 +721,7 @@ text = "HP"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Stats" type="MarginContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB"]
+[node name="Stats" type="MarginContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 5
@@ -388,77 +729,84 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats"]
+[node name="VB" type="VBoxContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats"]
+layout_mode = 2
+
+[node name="HB" type="HBoxContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="StatName" type="VBoxContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer"]
+[node name="StatName" type="VBoxContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB"]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 size_flags_horizontal = 2
 
-[node name="Atk" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer/StatName"]
+[node name="Atk" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB/StatName"]
 custom_minimum_size = Vector2(25, 15)
 layout_mode = 2
+tooltip_text = "Affects damage the unit inflicts per hit."
+mouse_filter = 0
 theme_override_fonts/font = ExtResource("4_ftkd0")
 theme_override_font_sizes/font_size = 8
 text = "Atk:"
 vertical_alignment = 1
 
-[node name="Dex" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer/StatName"]
+[node name="Dex" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB/StatName"]
 custom_minimum_size = Vector2(25, 15)
 layout_mode = 2
+tooltip_text = "Affects hit and critical chances of the unit."
+mouse_filter = 0
 theme_override_fonts/font = ExtResource("4_ftkd0")
 theme_override_font_sizes/font_size = 8
 text = "Dex:"
 vertical_alignment = 1
 
-[node name="Spd" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer/StatName"]
+[node name="Spd" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB/StatName"]
 custom_minimum_size = Vector2(25, 15)
 layout_mode = 2
+tooltip_text = "Affects chance to avoid enemy hits and attack twice per combat."
+mouse_filter = 0
 theme_override_fonts/font = ExtResource("4_ftkd0")
 theme_override_font_sizes/font_size = 8
 text = "Spd:"
 vertical_alignment = 1
 
-[node name="Def" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer/StatName"]
+[node name="Def" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB/StatName"]
 custom_minimum_size = Vector2(25, 15)
 layout_mode = 2
+tooltip_text = "Lowers incoming physical damage."
+mouse_filter = 0
 theme_override_fonts/font = ExtResource("4_ftkd0")
 theme_override_font_sizes/font_size = 8
 text = "Def:"
 vertical_alignment = 1
 
-[node name="Res" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer/StatName"]
+[node name="Res" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB/StatName"]
 custom_minimum_size = Vector2(25, 15)
 layout_mode = 2
+tooltip_text = "Lowers incoming magical damage."
+mouse_filter = 0
 theme_override_fonts/font = ExtResource("4_ftkd0")
 theme_override_font_sizes/font_size = 8
 text = "Res:"
 vertical_alignment = 1
 
-[node name="Mov" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer/StatName"]
+[node name="Mov" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB/StatName"]
 custom_minimum_size = Vector2(25, 15)
 layout_mode = 2
+tooltip_text = "Affects how far the unit can move per turn."
+mouse_filter = 0
 theme_override_fonts/font = ExtResource("4_ftkd0")
 theme_override_font_sizes/font_size = 8
 text = "Mov:"
 vertical_alignment = 1
 
-[node name="Range" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer/StatName"]
-custom_minimum_size = Vector2(25, 15)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_ftkd0")
-theme_override_font_sizes/font_size = 8
-text = "Ran:"
-vertical_alignment = 1
-
-[node name="StatUnit" type="VBoxContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer"]
+[node name="StatUnit" type="VBoxContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB"]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Atk" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer/StatUnit"]
+[node name="Atk" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB/StatUnit"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(25, 15)
 layout_mode = 2
@@ -468,7 +816,7 @@ text = "20"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Dex" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer/StatUnit"]
+[node name="Dex" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB/StatUnit"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(25, 15)
 layout_mode = 2
@@ -478,7 +826,7 @@ text = "14"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Spd" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer/StatUnit"]
+[node name="Spd" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB/StatUnit"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(25, 15)
 layout_mode = 2
@@ -488,7 +836,7 @@ text = "16"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Def" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer/StatUnit"]
+[node name="Def" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB/StatUnit"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(25, 15)
 layout_mode = 2
@@ -498,7 +846,7 @@ text = "12"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Res" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer/StatUnit"]
+[node name="Res" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB/StatUnit"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(25, 15)
 layout_mode = 2
@@ -508,7 +856,7 @@ text = "8"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Mov" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer/StatUnit"]
+[node name="Mov" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB/StatUnit"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(25, 15)
 layout_mode = 2
@@ -518,22 +866,12 @@ text = "3"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Range" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer/StatUnit"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(25, 15)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_ftkd0")
-theme_override_font_sizes/font_size = 8
-text = "1"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="StatBonus" type="VBoxContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer"]
+[node name="StatBonus" type="VBoxContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB"]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 
-[node name="AtkBonus" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer/StatBonus"]
+[node name="AtkBonus" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB/StatBonus"]
 unique_name_in_owner = true
 modulate = Color(0, 0.803922, 0.219608, 1)
 custom_minimum_size = Vector2(25, 15)
@@ -544,7 +882,7 @@ text = "+8"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DexBonus" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer/StatBonus"]
+[node name="DexBonus" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB/StatBonus"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(25, 15)
 layout_mode = 2
@@ -553,7 +891,7 @@ theme_override_font_sizes/font_size = 8
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SpdBonus" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer/StatBonus"]
+[node name="SpdBonus" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB/StatBonus"]
 unique_name_in_owner = true
 modulate = Color(0.87451, 0, 0.12549, 1)
 custom_minimum_size = Vector2(25, 15)
@@ -564,7 +902,7 @@ text = "-5"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DefBonus" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer/StatBonus"]
+[node name="DefBonus" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB/StatBonus"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(25, 15)
 layout_mode = 2
@@ -573,7 +911,7 @@ theme_override_font_sizes/font_size = 8
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ResBonus" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer/StatBonus"]
+[node name="ResBonus" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB/StatBonus"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(25, 15)
 layout_mode = 2
@@ -582,7 +920,7 @@ theme_override_font_sizes/font_size = 8
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MovBonus" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer/StatBonus"]
+[node name="MovBonus" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB/StatBonus"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(25, 15)
 layout_mode = 2
@@ -591,10 +929,24 @@ theme_override_font_sizes/font_size = 8
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RangeBonus" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MarginContainer/VB/Stats/HBoxContainer/StatBonus"]
-unique_name_in_owner = true
+[node name="HB2" type="HBoxContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Range" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB2"]
 custom_minimum_size = Vector2(25, 15)
 layout_mode = 2
+tooltip_text = "Affects how far the weapon can attack."
+mouse_filter = 0
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 8
+text = "Ran:"
+vertical_alignment = 1
+
+[node name="RangeValue" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("4_ftkd0")
 theme_override_font_sizes/font_size = 8
 horizontal_alignment = 1
@@ -615,6 +967,8 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("4_ftkd0")
 text = "End Turn"
 
+[connection signal="pressed" from="HB/MidUI/LowerMidUI/ActionMenu/Weapon1" to="." method="_on_weapon_pressed" binds= [1]]
+[connection signal="pressed" from="HB/MidUI/LowerMidUI/ActionMenu/Weapon2" to="." method="_on_weapon_pressed" binds= [2]]
 [connection signal="pressed" from="HB/MidUI/LowerMidUI/ActionMenu/Heal" to="." method="_on_heal_pressed"]
 [connection signal="pressed" from="HB/MidUI/LowerMidUI/ActionMenu/Wait" to="." method="_on_wait_pressed"]
 [connection signal="pressed" from="HB/RightSideUI/LowerRightUI/EndTurn" to="." method="_on_end_turn_pressed"]

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Damage_Type" load_steps=2 format=3 uid="uid://bdou5jte6g5ot"]
+
+[ext_resource type="Script" path="res://resources/classes/Damage_Type.gd" id="1_x3xjo"]
+
+[resource]
+script = ExtResource("1_x3xjo")
+type_name = "magical"
+target_stat = "resistance"
