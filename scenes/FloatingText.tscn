@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cax2l3qyrw7kr"]
+
+[ext_resource type="Script" path="res://scripts/FloatingText.gd" id="1_immva"]
+[ext_resource type="FontFile" uid="uid://ky30ssmy7wih" path="res://assets/fonts/Kenney Pixel Square.ttf" id="2_l1h3x"]
+
+[node name="FloatingText" type="Marker2D"]
+scale = Vector2(0.7, 0.7)
+script = ExtResource("1_immva")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_l1h3x")
+theme_override_font_sizes/font_size = 8
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1

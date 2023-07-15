@@ -11,6 +11,7 @@ extends CanvasLayer
 @onready var terrain_info = get_node("%TerrainInfo")
 @onready var unit_info = get_node("%UnitInfo")
 @onready var combat_info = get_node("%CombatInfo")
+@onready var menu_screen = get_node("%MenuScreen")
 
 #ui colors
 @onready var player_color = Color("#2e43fb")
@@ -23,6 +24,7 @@ extends CanvasLayer
 var selected_unit : Unit
 var hovered_unit : Unit
 var active_player
+@onready var in_action_mode = false
 @onready var in_attack_mode = false
 
 func _ready():
@@ -30,6 +32,7 @@ func _ready():
 	Eventmanager.hoverUnit.connect(_on_hover_unit)
 	Eventmanager.unhoverUnit.connect(_on_unhover_unit)
 	Eventmanager.unitStatsUpdated.connect(_on_unit_stats_updated)
+	Eventmanager.gameEnded.connect(_on_game_ended)
 
 #gets called in _ready() function of GameScene
 func _initialize_ui(p_unit_count, e_unit_count):
@@ -39,10 +42,20 @@ func _initialize_ui(p_unit_count, e_unit_count):
 	enemy_units.modulate = enemy_color
 	enemy_units_count.text = str(e_unit_count)
 	enemy_units_count.modulate = enemy_color
+	menu_screen.visible = false
 	_toggle_action_menu(false)
 	_toggle_unit_info()
 	_toggle_combat_preview()
 	_on_next_turn_started(0)
+
+func _on_game_ended(winningPlayerNumber):
+	var text
+	if winningPlayerNumber == 0:
+		text = "Victory!"
+	else:
+		text = "Defeat!"
+	menu_screen.get_child(0).text = text
+	_toggle_menu_button()
 
 func _disable_button(button, button_state : bool):
 	if button_state == true:
@@ -57,6 +70,10 @@ func _toggle_unit_info():
 		unit_info.visible = true
 	else:
 		unit_info.visible = false
+
+func _toggle_menu_button():
+	menu_screen.visible = not menu_screen.visible
+	get_tree().paused = not get_tree().paused
 
 func _toggle_action_menu(visibility_state : bool):
 	if visibility_state == true and selected_unit.team == active_player and selected_unit.already_acted == false:
@@ -123,14 +140,36 @@ func _set_weapon_tooltip(weapon : Weapon):
 	
 	return weapon_tooltip
 
+func _set_in_action_mode(action_mode_state : bool):
+	in_action_mode = action_mode_state
+	if in_action_mode == true:
+		action_menu.visible = false
+		end_turn.visible = false
+	else:
+		action_menu.visible = true
+		end_turn.visible = true
+
+func _set_in_attack_mode(attack_mode_state : bool):
+	in_attack_mode = attack_mode_state
+	if in_attack_mode == true:
+		end_turn.visible = false
+	else:
+		end_turn.visible = true
+
+func _on_main_menu_pressed():
+	Eventmanager.emit_signal("mainMenu")
+
 func _on_weapon_pressed(weapon_number):
 	selected_unit._equip_weapon(weapon_number)
 	_update_stat_info("all")
 	Eventmanager.emit_signal("setAttackMode", true)
 
 func _on_heal_pressed():
-	selected_unit._heal()
-	_unselect_unit()
+	if get_node("%Heal").disabled == false:
+		selected_unit._heal()
+		_unselect_unit()
+	else:
+		print("Heal action not available.")
 
 func _on_wait_pressed():
 	selected_unit._wait()
@@ -180,11 +219,9 @@ func _update_stat_info(stat):
 			unit = selected_unit
 	else:
 		unit = hovered_unit
-		
 	_update_unit_stats(unit, stat)
-	_update_unit_bonus(unit, stat)
 
-func _update_unit_stats(unit, stat):
+func _update_unit_stats(unit : Unit, stat):
 	match stat:
 		"name":
 			get_node("%Class").text = unit.character_class.unit_name
@@ -201,22 +238,26 @@ func _update_unit_stats(unit, stat):
 		"hp_max":
 			get_node("%HPMax").text = str(unit.hp_max)
 		"atk":
-			get_node("%Atk").text = str(unit.attack)
+			_set_unit_stat(get_node("%Atk"), unit.attack, unit.attack_bonus)
 		"dex":
-			get_node("%Dex").text = str(unit.dexterity)
+			_set_unit_stat(get_node("%Dex"), unit.dexterity, unit.dexterity_bonus)
 		"spd":
-			get_node("%Spd").text = str(unit.speed)
+			_set_unit_stat(get_node("%Spd"), unit.speed, unit.speed_bonus)
 		"def":
-			get_node("%Def").text = str(unit.defence)
+			_set_unit_stat(get_node("%Def"), unit.defence, unit.defence_bonus)
 		"res":
-			get_node("%Res").text = str(unit.resistance)
-		"mov":
-			get_node("%Mov").text = str(unit.movement)
+			_set_unit_stat(get_node("%Res"), unit.resistance, unit.resistance_bonus)
 		"range":
 			if unit.equipped_weapon.min_range == unit.equipped_weapon.max_range:
-				get_node("%RangeValue").text = str(unit.equipped_weapon.max_range)
+				get_node("%Range").text = str(unit.equipped_weapon.max_range)
 			else:
-				get_node("%RangeValue").text = str(unit.equipped_weapon.min_range) + " - " + str(unit.equipped_weapon.max_range)
+				get_node("%Range").text = str(unit.equipped_weapon.min_range) + " - " + str(unit.equipped_weapon.max_range)
+		"hit_rate":
+			_set_unit_stat(get_node("%HitRate"), unit.hit_chance, unit.hit_chance_bonus)
+		"avoid":
+			_set_unit_stat(get_node("%Avoid"), unit.avoid_chance, unit.avoid_chance_bonus)
+		"crit_rate":
+			_set_unit_stat(get_node("%CritRate"), unit.crit_chance, unit.crit_chance_bonus)
 		"all":
 			_update_unit_stats(unit, "name")
 			_update_unit_stats(unit, "weapon")
@@ -227,79 +268,81 @@ func _update_unit_stats(unit, stat):
 			_update_unit_stats(unit, "spd")
 			_update_unit_stats(unit, "def")
 			_update_unit_stats(unit, "res")
-			_update_unit_stats(unit, "mov")
 			_update_unit_stats(unit, "range")
+			_update_unit_stats(unit, "hit_rate")
+			_update_unit_stats(unit, "avoid")
+			_update_unit_stats(unit, "crit_rate")
 		_:
 			print("No stat specified for update")
 
-func _update_unit_bonus(unit, stat):
-	var stat_value
-	var stat_node
-	
-	match stat:
-		"atk":
-			stat_value = unit.attack_bonus
-			stat_node = get_node("%AtkBonus")
-			_set_unit_bonus(stat_value, stat_node)
-		"dex":
-			stat_value = unit.dexterity_bonus
-			stat_node = get_node("%DexBonus")
-			_set_unit_bonus(stat_value, stat_node)
-		"spd":
-			stat_value = unit.speed_bonus
-			stat_node = get_node("%SpdBonus")
-			_set_unit_bonus(stat_value, stat_node)
-		"def":
-			stat_value = unit.defence_bonus
-			stat_node = get_node("%DefBonus")
-			_set_unit_bonus(stat_value, stat_node)
-		"res":
-			stat_value = unit.resistance_bonus
-			stat_node = get_node("%ResBonus")
-			_set_unit_bonus(stat_value, stat_node)
-		"mov":
-			stat_value = unit.movement_bonus
-			stat_node = get_node("%MovBonus")
-			_set_unit_bonus(stat_value, stat_node)
-		"all":
-			_update_unit_bonus(unit, "atk")
-			_update_unit_bonus(unit, "dex")
-			_update_unit_bonus(unit, "spd")
-			_update_unit_bonus(unit, "def")
-			_update_unit_bonus(unit, "res")
-			_update_unit_bonus(unit, "mov")
-		_:
-			print("No stat specified for update")
+func _set_unit_stat(node, base_value, bonus_value):
+	node.text = str(base_value + bonus_value)
+	node.modulate = _set_stat_color(bonus_value)
 
-func _set_unit_bonus(stat_value, stat_node):
-	if stat_value > 0:
-		stat_node.text = "+" + str(stat_value)
-		stat_node.modulate = buff_color
-	elif stat_value < 0:
-		stat_node.text = str(stat_value)
-		stat_node.modulate = debuff_color
+func _set_stat_color(bonus_value):
+	var color : Color
+	if bonus_value > 0:
+		color = buff_color
+	elif bonus_value < 0:
+		color = debuff_color
 	else:
-		stat_node.text = ""
+		color = neutral_color
+	return color
 
-func _update_terrain_info(terrain_information):
+func _update_terrain_info(terrain_information : Terrain_Info):
+	var buff_active : bool
+	var debuff_active : bool
 	get_node("%TerrainName").text = terrain_information.tile_name
 	if terrain_information.movement_cost == 0:
-		get_node("%TerrainMovCostValue").text = "Impassable"
+		get_node("%TerrainMovCost").text = ""
+		get_node("%TerrainMovCostValue").text = ""
+		get_node("%Impassable").text = "Impassable"
 	else:
+		get_node("%TerrainMovCost").text = "Mov:"
 		get_node("%TerrainMovCostValue").text = str(terrain_information.movement_cost)
-		
+		get_node("%Impassable").text = ""
+	
+	#sets values for buff label
 	if terrain_information.buff_defence == true:
-		get_node("%TerrainSeperator").text = "|"
-		get_node("%TerrainBuff").text = "Def/Res:"
+		buff_active = true
+		get_node("%TerrainBuff").text = "Def/Res: "
 		get_node("%TerrainBuffValue").text = "+" + str(terrain_information.buff_defence_value)
 	elif terrain_information.buff_avoid == true:
-		get_node("%TerrainSeperator").text = "|"
-		get_node("%TerrainBuff").text = "Avoid:"
+		buff_active = true
+		get_node("%TerrainBuff").text = "Avo: "
 		get_node("%TerrainBuffValue").text = "+" + str(terrain_information.buff_avoid_value)
+	elif terrain_information.buff_dex == true:
+		buff_active = true
+		get_node("%TerrainBuff").text = "Dex: "
+		get_node("%TerrainBuffValue").text = "+" + str(terrain_information.buff_dex_value)
 	else:
-		get_node("%TerrainSeperator").text = ""
+		buff_active = false
 		get_node("%TerrainBuff").text = ""
 		get_node("%TerrainBuffValue").text = ""
+	
+	#sets values for debuff label
+	if terrain_information.debuff_resistance == true:
+		debuff_active = true
+		get_node("%TerrainDebuff").text = "Res: "
+		get_node("%TerrainDebuffValue").text = "-" + str(terrain_information.debuff_resistance_value)
+	elif terrain_information.debuff_avoid == true:
+		debuff_active = true
+		get_node("%TerrainDebuff").text = "Avo: "
+		get_node("%TerrainDebuffValue").text = "-" + str(terrain_information.debuff_avoid_value)
+	elif terrain_information.debuff_dex == true:
+		debuff_active = true
+		get_node("%TerrainDebuff").text = "Dex: "
+		get_node("%TerrainDebuffValue").text = "-" + str(terrain_information.debuff_dex_value)
+	else:
+		debuff_active = false
+		get_node("%TerrainDebuff").text = ""
+		get_node("%TerrainDebuffValue").text = ""
+	
+	#sets separator if terrain has buffs and debuffs
+	if buff_active == true and debuff_active == true:
+		get_node("%TerrainSeperator").text = "|"
+	else:
+		get_node("%TerrainSeperator").text = ""
 
 func _toggle_combat_preview():
 	if selected_unit != null and hovered_unit != null:
@@ -342,18 +385,39 @@ func _format_attack_value(data : Combat_Data):
 		get_node("%EnemyFollowUp").visible = false
 
 func _format_progress_bars(data : Combat_Data):
-	var hp_bar_value = (data.initiating_unit.hp * 100) / (data.initiating_unit.hp + data.target_unit.hp)
+	var color_init
+	var color_target
 	var initiating_atk_multiplier = 1
 	var target_atk_multiplier = 1
+	
+	if data.initiating_unit.unit.team == 0:
+		color_init = player_color
+		color_target = enemy_color
+	else:
+		color_init = enemy_color
+		color_target = player_color
+		
 	if data.initiating_unit.follow_up == true:
 		initiating_atk_multiplier = 2
 	if data.target_unit.follow_up == true:
 		target_atk_multiplier = 2
-	var atk_bar_value = (data.initiating_unit.atk * initiating_atk_multiplier * 100) / (data.initiating_unit.atk * initiating_atk_multiplier + data.target_unit.atk * target_atk_multiplier)
-	var hit_bar_value = (data.initiating_unit.hit_chance * 100) / (data.initiating_unit.hit_chance + data.target_unit.hit_chance)
-	var crit_bar_value = (data.initiating_unit.crit_chance * 100) / (data.initiating_unit.crit_chance + data.target_unit.crit_chance)
 	
-	get_node("%HPBar").value = hp_bar_value
-	get_node("%AtkBar").value = atk_bar_value
-	get_node("%HitBar").value = hit_bar_value
-	get_node("%CritBar").value = crit_bar_value
+	var atk_init = data.initiating_unit.atk * initiating_atk_multiplier
+	var atk_target = data.target_unit.atk * target_atk_multiplier
+	var hp_init_post = data.initiating_unit.hp - atk_target
+	var hp_target_post = data.target_unit.hp - atk_init
+	
+	_set_preview_bar(get_node("%HPPlayer"), color_init, hp_init_post, data.initiating_unit.hp)
+	_set_preview_bar(get_node("%HPEnemy"), color_target, hp_target_post, data.target_unit.hp)
+	_set_preview_bar(get_node("%AtkPlayer"), color_init, atk_init, atk_init + atk_target)
+	_set_preview_bar(get_node("%AtkEnemy"), color_target, atk_target, atk_init + atk_target)
+	_set_preview_bar(get_node("%HitPlayer"), color_init, data.initiating_unit.hit_chance, 100)
+	_set_preview_bar(get_node("%HitEnemy"), color_target, data.target_unit.hit_chance, 100)
+	_set_preview_bar(get_node("%CritPlayer"), color_init, data.initiating_unit.crit_chance, 100)
+	_set_preview_bar(get_node("%CritEnemy"), color_target, data.target_unit.crit_chance, 100)
+
+func _set_preview_bar(bar : TextureProgressBar, color : Color, progress : int, max_value : int):
+	bar.tint_progress = color
+	bar.max_value = max_value
+	bar.value = progress
+

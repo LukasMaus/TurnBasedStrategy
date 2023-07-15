@@ -14,9 +14,14 @@ var enemy_unit_positions = []
 @onready var cursor_tile = Vector2(0, 0)
 var cursor_tile_information
 
-var defence_buff_value = 3
-var avoid_buff_value = 20
-var critical_multiplier_value = 2
+@export_group("Game Values")
+@export var defence_buff_value : int
+@export var resistance_debuff_value : int
+@export var avoid_buff_value : int
+@export var avoid_debuff_value : int
+@export var dex_buff_value : int
+@export var dex_debuff_value : int
+@export var critical_multiplier_value : int
 
 func _ready():
 	_initialize_unit_positions()
@@ -39,6 +44,8 @@ func _process(_delta):
 func _check_input():
 	if Input.is_action_just_pressed("unselect_unit"):
 		_on_unselect_unit()
+	if Input.is_action_just_pressed("menu"):
+		ui_node._toggle_menu_button()
 	if Input.is_action_just_pressed("unit_move") and selected_unit != null and selected_unit.unit_tile != cursor_tile and selected_unit.already_moved == false and selected_unit.team == active_player:
 		if _mouse_within_bounds() == true:
 			var movement_path = map_node.movement_preview.points
@@ -54,11 +61,19 @@ func _check_input():
 						selected_unit._move(move_info)
 			else:
 				print("No path to destination")
+	if Input.is_action_just_pressed("action_weapon_1") and selected_unit != null and selected_unit.already_acted == false and selected_unit.team == active_player:
+		ui_node._on_weapon_pressed(1)
+	if Input.is_action_just_pressed("action_weapon_2") and selected_unit != null and selected_unit.already_acted == false and selected_unit.team == active_player:
+		ui_node._on_weapon_pressed(2)
+	if Input.is_action_just_pressed("action_heal") and selected_unit != null and selected_unit.already_acted == false and selected_unit.team == active_player:
+		ui_node._on_heal_pressed()
+	if Input.is_action_just_pressed("action_wait") and selected_unit != null and selected_unit.already_acted == false and selected_unit.team == active_player:
+		ui_node._on_wait_pressed()
 
 func _on_clicked_unit(clicked_unit : Unit):
 	if in_action == false:
 		if in_attack_mode == true and _check_valid_attack_target(selected_unit, clicked_unit) == true:
-			_initate_combat(selected_unit, clicked_unit)
+			_initiate_combat(selected_unit, clicked_unit)
 		else:
 			_on_select_unit(clicked_unit)
 
@@ -68,6 +83,10 @@ func _on_select_unit(selected_unit_new : Unit):
 	selected_unit._unit_selected()
 	ui_node._select_unit(selected_unit)
 	if selected_unit.already_moved == false and selected_unit.already_acted == false:
+		if selected_unit.team == 0:
+			map_node._set_units_to_solid(player_unit_positions, enemy_unit_positions)
+		else:
+			map_node._set_units_to_solid(enemy_unit_positions, player_unit_positions)
 		map_node._calculate_reachable_tiles(selected_unit)
 		map_node._update_movement_preview(selected_unit.unit_tile, cursor_tile)
 		if selected_unit.team == active_player:
@@ -78,8 +97,8 @@ func _on_unselect_unit():
 		selected_unit._unit_unselected()
 		ui_node._unselect_unit()
 	selected_unit = null
-	in_attack_mode = false
-	ui_node.in_attack_mode = false
+	_on_set_attack_mode(false)
+	ui_node._set_in_attack_mode(false)
 	map_node._toggle_movement_preview(false)
 	map_node._clear_reachable_tiles()
 
@@ -91,8 +110,7 @@ func _update_cursor():
 		cursor.position = Globals._calculate_tile(get_global_mouse_position())
 		cursor_tile = mouse_tile
 		cursor_tile_information = map_node._get_tile_information(cursor_tile)
-		cursor_tile_information.buff_defence_value = defence_buff_value
-		cursor_tile_information.buff_avoid_value = avoid_buff_value
+		_set_terrain_info_values(cursor_tile_information)
 		ui_node._update_terrain_info(cursor_tile_information)
 		if selected_unit != null:
 			map_node._update_movement_preview(selected_unit.unit_tile, cursor_tile)
@@ -126,11 +144,12 @@ func _on_next_turn():
 
 func _set_in_action(in_action_state):
 	in_action = in_action_state
+	ui_node._set_in_action_mode(in_action_state)
 	print("In action mode is set to: " + str(in_action))
 
 func _on_set_attack_mode(attack_mode_state):
 	in_attack_mode = attack_mode_state
-	ui_node.in_attack_mode = attack_mode_state
+	ui_node._set_in_attack_mode(attack_mode_state)
 	if in_attack_mode == true:
 		map_node._calculate_targetable_tiles(selected_unit)
 	else:
@@ -144,8 +163,7 @@ func _initialize_unit_positions():
 			var unit = map_node.get_child(i).get_child(j)
 			unit_array.append(unit.unit_tile)
 			var terrain_info = map_node._get_tile_information(unit.unit_tile)
-			terrain_info.buff_defence_value = defence_buff_value
-			terrain_info.buff_avoid_value = avoid_buff_value
+			_set_terrain_info_values(terrain_info)
 			unit._set_terrain_info(terrain_info)
 		print("Player " + str(i) + " unit positions: " + str(unit_array))
 
@@ -158,8 +176,8 @@ func _on_new_unit_position(unit : Unit):
 	
 	#determines the information of the new tile the unit stands on and sends it to the unit
 	var terrain_info = map_node._get_tile_information(unit.unit_tile)
-	terrain_info.buff_defence_value = defence_buff_value
-	terrain_info.buff_avoid_value = avoid_buff_value
+	print(terrain_info.tile_name)
+	_set_terrain_info_values(terrain_info)
 	unit._set_terrain_info(terrain_info)
 	#print("Player " + str(player) + " unit positions: " + str(unit_array))
 
@@ -179,6 +197,14 @@ func _get_unit_array(player):
 	else:
 		unit_array = enemy_unit_positions
 	return unit_array
+
+func _set_terrain_info_values(terrain : Terrain_Info):
+	terrain.buff_defence_value = defence_buff_value
+	terrain.buff_avoid_value = avoid_buff_value
+	terrain.buff_dex_value = dex_buff_value
+	terrain.debuff_resistance_value = resistance_debuff_value
+	terrain.debuff_avoid_value = avoid_debuff_value
+	terrain.debuff_dex_value = dex_debuff_value
 
 #checks if target is in range of unit and belongs to the correct team
 func _check_valid_attack_target(init_unit : Unit, target_unit : Unit):
@@ -200,17 +226,22 @@ func _check_valid_attack_target(init_unit : Unit, target_unit : Unit):
 			return false
 	else:
 		return false
-	
 
 func _get_tile_distance(tile_id_1, tile_id_2):
 	var distance_vector = tile_id_1  - tile_id_2
 	var distance = abs(distance_vector.x) + abs(distance_vector.y)
 	return distance
 
-func _initate_combat(init_unit : Unit, tar_unit : Unit):
+func _initiate_combat(init_unit : Unit, tar_unit : Unit):
 	var combat_data = Combat_Data.new()
 	combat_data._calculate_combat_data(init_unit, tar_unit)
 	_set_in_action(true)
+	map_node._clear_movement_preview()
+	
+	init_unit._set_unit_direction(init_unit.unit_tile, tar_unit.unit_tile)
+	tar_unit._set_unit_direction(tar_unit.unit_tile, init_unit.unit_tile)
+	init_unit._play_animation()
+	tar_unit._play_animation()
 	
 	for i in combat_data.action_order.size():
 		var acting_unit = combat_data.action_order[i]
@@ -225,34 +256,55 @@ func _initate_combat(init_unit : Unit, tar_unit : Unit):
 			_unit_attack(acting_unit, defending_unit)
 		else:
 			pass
+		await get_tree().create_timer(0.8).timeout
 	
-	map_node._clear_reachable_tiles()
 	_set_in_action(false)
-	_on_set_attack_mode(false)
 	ui_node._update_stat_info("all")
 	init_unit._end_turn()
+	_on_unselect_unit()
+	
 
 func _unit_attack(attacking_unit : Combat_Data_Unit, defending_unit : Combat_Data_Unit):
 	randomize()
+	var hit_type
 	var critical_multiplier
+	var damage_value
 	
+	attacking_unit.unit._set_action_state("attack")
+	attacking_unit.unit._play_animation()
 	if randi() % 100 < attacking_unit.hit_chance:
-		print("hit")
 		if randi() % 100 < attacking_unit.crit_chance:
 			print("critical hit")
+			hit_type = "critical"
 			critical_multiplier = critical_multiplier_value
 		else:
 			print("normal hit")
+			hit_type = "hit"
 			critical_multiplier = 1
-		defending_unit.hp -= attacking_unit.atk * critical_multiplier
-		defending_unit.unit._set_hp(defending_unit.hp)
+		if attacking_unit.hit_type == "heal":
+			hit_type = "heal"
+		damage_value = attacking_unit.atk * critical_multiplier
+		print(str(damage_value) + " damage")
+		defending_unit.hp -= damage_value
+		defending_unit.unit._change_hp(damage_value, hit_type)
 	else:
+		defending_unit.unit._set_action_state("dodge")
+		defending_unit.unit._play_animation()
+		hit_type = "miss"
+		defending_unit.unit._change_hp(0, hit_type)
 		print("miss")
 
 func _on_unit_killed(unit):
 	var unit_array = _get_unit_array(unit.team)
-	print(str(unit_array))
 	ui_node._update_unit_count(unit.team, -1)
 	ui_node._on_unhover_unit(unit)
+	if unit == selected_unit:
+		ui_node._unselect_unit()
 	unit_array.erase(unit.unit_tile)
-	print(str(unit_array))
+	_check_winning_condition()
+
+func _check_winning_condition():
+	if player_unit_positions.is_empty() == true:
+		Eventmanager.emit_signal("gameEnded", 1)
+	if enemy_unit_positions.is_empty() == true:
+		Eventmanager.emit_signal("gameEnded", 0)

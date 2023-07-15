@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://resources/classes/Unit_Class.gd" id="1_mrulg"]
 [ext_resource type="Texture2D" uid="uid://cqnqgm5e04hc7" path="res://assets/spritesheets/Warrior_1.png" id="2_c8oi4"]
-[ext_resource type="Texture2D" uid="uid://byp078dgdeyel" path="res://assets/spritesheets/Warrior_0.png" id="3_ypfyx"]
+[ext_resource type="Texture2D" uid="uid://dibiefgl7ogop" path="res://assets/spritesheets/Warrior_0.png" id="3_ypfyx"]
 [ext_resource type="Resource" uid="uid://c3ktpevr1emam" path="res://resources/weapons/Axe.tres" id="4_4ja5i"]
 [ext_resource type="Resource" uid="uid://dlbcosj88oa7v" path="res://resources/weapons/Cleaver.tres" id="5_4pig0"]
 

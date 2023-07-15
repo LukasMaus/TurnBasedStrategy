@@ -1,0 +1,243 @@
+[gd_scene load_steps=9 format=3 uid="uid://ba4by825jomwh"]
+
+[ext_resource type="TileSet" uid="uid://bqmum87greqec" path="res://resources/tilesets/tile_set.tres" id="1_qo3lm"]
+[ext_resource type="Script" path="res://scripts/Pathfinding.gd" id="2_twpn4"]
+[ext_resource type="PackedScene" uid="uid://c3ewce766u103" path="res://scenes/Unit.tscn" id="3_wdipa"]
+[ext_resource type="Resource" uid="uid://dujmahtr1w3c6" path="res://resources/units/Warrior.tres" id="4_bjb84"]
+[ext_resource type="Resource" uid="uid://c3lutvut5pedu" path="res://resources/units/Soldier.tres" id="5_y4vcg"]
+[ext_resource type="Resource" uid="uid://dql3d6267g3st" path="res://resources/units/Lancer.tres" id="6_xj3x1"]
+[ext_resource type="Resource" uid="uid://cry7nklhoabj6" path="res://resources/units/Mage.tres" id="7_bhnnt"]
+[ext_resource type="Resource" uid="uid://q8kljhd1pget" path="res://resources/units/Archer.tres" id="8_et3lk"]
+
+[node name="Map" type="TileMap"]
+process_mode = 1
+tile_set = ExtResource("1_qo3lm")
+format = 2
+layer_0/name = "Ground"
+layer_0/tile_data = PackedInt32Array(0, 0, 7, 1, 131072, 7, 2, 65536, 0, 3, 0, 7, 4, 131072, 7, 5, 131072, 0, 6, 0, 7, 7, 65536, 7, 8, 65536, 7, 9, 65536, 7, 10, 131072, 7, 11, 0, 0, 12, 327680, 8, 13, 196608, 14, 14, 65536, 16, 15, 65536, 16, 65536, 0, 9, 720896, 0, 0, 16, 65536, 16, 17, 65536, 16, 131072, 65536, 0, 196608, 0, 7, 262144, 0, 9, 327680, 131072, 0, 393216, 65536, 0, 458752, 65536, 0, 524288, 0, 0, 589824, 0, 0, 655360, 131072, 0, 18, 65536, 16, 19, 65536, 16, 20, 65536, 16, 21, 131072, 17, 22, 65536, 16, 23, 262144, 14, 786432, 0, 0, 851968, 65536, 0, 917504, 0, 0, 983040, 65536, 0, 983041, 0, 6, 983042, 131072, 6, 983043, 131072, 0, 983044, 131072, 0, 983045, 0, 0, 983046, 196608, 0, 983047, 131072, 0, 983048, 0, 9, 983049, 65536, 9, 983050, 65536, 9, 983051, 65536, 9, 983052, 65536, 9, 983053, 65536, 9, 983063, 262144, 15, 917527, 0, 15, 851991, 0, 15, 786455, 0, 15, 983062, 65536, 14, 983061, 65536, 14, 983060, 65536, 14, 983059, 65536, 14, 983058, 65536, 14, 983057, 196608, 15, 983056, 327680, 8, 983055, 393216, 9, 983054, 393216, 9, 720919, 0, 15, 655383, 0, 15, 589847, 0, 15, 524311, 0, 15, 458775, 0, 15, 393239, 0, 15, 327703, 0, 15, 262167, 0, 15, 196631, 0, 15, 131095, 0, 15, 65559, 0, 15, 524289, 0, 0, 589825, 0, 0, 655361, 196608, 0, 720897, 65536, 0, 786433, 0, 4, 917526, 0, 13, 851990, 0, 13, 786454, 131072, 16, 720918, 131072, 15, 655382, 131072, 15, 589846, 131072, 15, 524310, 131072, 15, 458774, 131072, 15, 393238, 131072, 14, 327702, 0, 13, 262166, 0, 13, 196630, 0, 13, 131094, 131072, 16, 65558, 131072, 15, 917525, 0, 13, 851989, 131072, 16, 786453, 196608, 14, 720917, 131072, 6, 655381, 131072, 5, 589845, 131072, 5, 524309, 131072, 5, 458773, 131072, 4, 393237, 196608, 15, 327701, 131072, 15, 262165, 131072, 14, 196629, 0, 13, 131093, 65536, 16, 65557, 131072, 0, 917524, 0, 13, 851988, 65536, 16, 786452, 131072, 6, 720916, 0, 1, 655380, 196608, 1, 589844, 131072, 1, 524308, 0, 1, 458772, 393216, 1, 393236, 131072, 5, 327700, 131072, 4, 262164, 65536, 14, 196628, 0, 13, 131092, 0, 16, 65556, 0, 15, 917523, 0, 13, 851987, 65536, 16, 786451, 0, 6, 720915, 0, 5, 655379, 131072, 1, 589843, 327680, 1, 524307, 131072, 1, 458771, 65536, 1, 393235, 262144, 1, 327699, 65536, 4, 262163, 196608, 15, 196627, 131072, 14, 131091, 0, 13, 65555, 0, 13, 917522, 0, 13, 851986, 0, 16, 786450, 0, 15, 720914, 262144, 14, 655378, 0, 6, 589842, 131072, 1, 524306, 327680, 1, 458770, 327680, 1, 393234, 131072, 1, 327698, 0, 5, 262162, 262144, 4, 196626, 65536, 14, 131090, 0, 13, 65554, 0, 13, 917521, 131072, 14, 851985, 0, 13, 786449, 0, 13, 720913, 0, 16, 655377, 262144, 14, 589841, 0, 6, 524305, 0, 5, 458769, 0, 5, 393233, 0, 4, 327697, 262144, 15, 262161, 0, 15, 196625, 0, 14, 131089, 0, 13, 65553, 0, 13, 917520, 65536, 14, 851984, 0, 13, 786448, 0, 13, 720912, 0, 13, 655376, 0, 16, 589840, 0, 15, 524304, 0, 15, 458768, 0, 15, 393232, 0, 15, 327696, 0, 14, 262160, 0, 13, 196624, 131072, 16, 131088, 131072, 15, 65552, 131072, 14, 917519, 65536, 14, 851983, 0, 13, 786447, 0, 13, 720911, 0, 13, 655375, 131072, 16, 589839, 131072, 15, 524303, 131072, 15, 458767, 131072, 15, 393231, 131072, 15, 327695, 131072, 14, 262159, 0, 13, 196623, 65536, 16, 131087, 196608, 0, 65551, 65536, 14, 917518, 196608, 15, 851982, 131072, 15, 786446, 131072, 15, 720910, 131072, 14, 655374, 65536, 16, 589838, 0, 0, 524302, 131072, 6, 458766, 131072, 4, 393230, 196608, 0, 327694, 65536, 14, 262158, 0, 13, 196622, 0, 16, 131086, 0, 15, 65550, 0, 14, 917517, 131072, 8, 851981, 131072, 8, 786445, 131072, 7, 720909, 0, 14, 655373, 65536, 16, 589837, 0, 0, 524301, 65536, 6, 458765, 65536, 4, 393229, 131072, 0, 327693, 65536, 14, 262157, 0, 13, 196621, 0, 13, 131085, 0, 13, 65549, 131072, 16, 917516, 196608, 2, 851980, 0, 2, 786444, 65536, 7, 720908, 65536, 14, 655372, 65536, 16, 589836, 0, 0, 524300, 0, 6, 458764, 0, 4, 393228, 131072, 0, 327692, 65536, 14, 262156, 0, 13, 196620, 131072, 16, 131084, 131072, 15, 65548, 196608, 14, 917515, 0, 2, 851979, 196608, 2, 786443, 65536, 7, 720907, 196608, 15, 655371, 262144, 16, 589835, 0, 15, 524299, 65536, 17, 458763, 65536, 17, 393227, 0, 15, 327691, 524288, 16, 262155, 131072, 15, 196619, 196608, 14, 131083, 131072, 9, 65547, 131072, 7, 917514, 0, 2, 851978, 65536, 2, 786442, 262144, 8, 720906, 131072, 7, 655370, 196608, 15, 589834, 196608, 14, 524298, 131072, 6, 458762, 131072, 4, 393226, 196608, 15, 327690, 196608, 14, 262154, 65536, 0, 196618, 0, 0, 131082, 65536, 9, 65546, 131072, 2, 917513, 65536, 2, 851977, 196608, 2, 786441, 65536, 2, 720905, 65536, 2, 655369, 131072, 7, 589833, 65536, 0, 524297, 65536, 6, 458761, 65536, 4, 393225, 65536, 0, 327689, 0, 0, 262153, 131072, 9, 196617, 131072, 8, 131081, 65536, 2, 65545, 0, 2, 917512, 0, 8, 851976, 131072, 2, 786440, 0, 2, 720904, 0, 8, 655368, 0, 7, 589832, 0, 0, 524296, 65536, 6, 458760, 65536, 4, 393224, 131072, 0, 327688, 196608, 0, 262152, 65536, 9, 196616, 131072, 2, 131080, 262144, 8, 65544, 65536, 2, 917511, 65536, 0, 851975, 65536, 9, 786439, 0, 7, 720903, 196608, 0, 655367, 131072, 0, 589831, 65536, 0, 524295, 65536, 6, 458759, 0, 4, 393223, 0, 0, 327687, 65536, 0, 262151, 65536, 9, 196615, 196608, 2, 131079, 0, 2, 65543, 0, 2, 917510, 131072, 0, 851974, 196608, 8, 786438, 196608, 0, 720902, 131072, 0, 655366, 65536, 0, 589830, 131072, 6, 524294, 65536, 4, 458758, 0, 0, 393222, 65536, 0, 327686, 131072, 9, 262150, 0, 8, 196614, 65536, 2, 131078, 196608, 2, 65542, 131072, 2, 917509, 196608, 0, 851973, 196608, 0, 786437, 65536, 0, 720901, 131072, 0, 655365, 131072, 6, 589829, 262144, 1, 524293, 65536, 4, 458757, 196608, 0, 393221, 131072, 9, 327685, 65536, 7, 262149, 196608, 0, 196613, 65536, 9, 131077, 196608, 2, 65541, 65536, 7, 917508, 65536, 0, 851972, 131072, 0, 786436, 0, 0, 720900, 131072, 6, 655364, 65536, 1, 589828, 0, 5, 524292, 0, 4, 458756, 0, 0, 393220, 0, 9, 327684, 0, 7, 262148, 0, 0, 196612, 65536, 9, 131076, 0, 2, 65540, 0, 2, 917507, 0, 0, 851971, 131072, 6, 786435, 131072, 5, 720899, 0, 1, 655363, 65536, 4, 589827, 196608, 0, 524291, 0, 0, 458755, 0, 0, 393219, 0, 0, 327683, 65536, 0, 262147, 196608, 0, 196611, 65536, 9, 131075, 262144, 8, 65539, 196608, 2, 917506, 131072, 5, 851970, 131072, 1, 786434, 131072, 1, 720898, 0, 5, 655362, 0, 4, 589826, 65536, 0, 524290, 0, 0, 458754, 0, 0, 393218, 262144, 9, 327682, 131072, 8, 262146, 131072, 8, 196610, 262144, 8, 131074, 196608, 2, 65538, 65536, 7, 917505, 0, 5, 851969, 0, 5, 458753, 196608, 0, 393217, 65536, 0, 327681, 0, 9, 262145, 196608, 2, 196609, 196608, 2, 131073, 0, 8, 65537, 262144, 8)
+layer_1/name = "Terrain"
+layer_1/enabled = true
+layer_1/modulate = Color(1, 1, 1, 1)
+layer_1/y_sort_enabled = false
+layer_1/y_sort_origin = 0
+layer_1/z_index = 0
+layer_1/tile_data = PackedInt32Array(458763, 720896, 12, 524299, 720896, 12, 458767, 720896, 12, 458768, 720896, 12, 524303, 720896, 12, 524304, 720896, 12, 458766, 655360, 12, 524302, 655360, 12, 458764, 786432, 12, 524300, 786432, 12, 458769, 786432, 12, 524305, 786432, 12, 131073, 786432, 8, 131074, 983040, 7, 196610, 917504, 8, 196609, 786432, 8, 262145, 786432, 8, 327681, 786432, 9, 327682, 851968, 9, 327683, 917504, 9, 262147, 917504, 7, 262146, 983040, 8, 131075, 851968, 9, 131076, 851968, 9, 65540, 851968, 8, 65539, 1048576, 8, 131079, 851968, 9, 131080, 917504, 9, 196614, 720896, 8, 262150, 720896, 7, 262151, 720896, 7, 393220, 655360, 8, 262152, 655360, 7, 131081, 720896, 8, 131082, 655360, 8, 131078, 851968, 9, 131077, 851968, 9, 65543, 851968, 8, 65544, 917504, 8, 65541, 851968, 8, 65542, 851968, 8, 65538, 851968, 7, 1, 655360, 8, 65537, 786432, 7, 65536, 655360, 8, 65546, 786432, 9, 65547, 851968, 9, 10, 786432, 7, 11, 917504, 7, 12, 917504, 7, 9, 655360, 7, 8, 917504, 7, 7, 851968, 7, 4, 851968, 7, 3, 786432, 7, 5, 851968, 7, 6, 851968, 7, 851976, 786432, 8, 786440, 786432, 7, 851977, 851968, 8, 786441, 851968, 7, 851978, 851968, 8, 917514, 851968, 8, 917513, 1048576, 7, 917515, 851968, 8, 983050, 851968, 9, 983049, 786432, 9, 917512, 786432, 9, 983051, 851968, 9, 983052, 917504, 9, 917516, 917504, 8, 851979, 983040, 8, 786443, 917504, 7, 983054, 720896, 7, 983053, 720896, 8, 851980, 917504, 7, 786442, 851968, 7, 589832, 655360, 6, 589825, 655360, 6, 458755, 786432, 6, 917509, 786432, 6, 393233, 786432, 6, 589836, 786432, 6, 393223, 917504, 6, 786436, 917504, 6, 786432, 720896, 6, 655378, 720896, 6, 393216, 851968, 6, 720903, 851968, 6, 458762, 655360, 12, 524298, 655360, 12, 720915, 655360, 11, 720917, 655360, 11, 65557, 655360, 11, 262162, 655360, 11)
+layer_2/name = "Movement_Preview"
+layer_2/enabled = true
+layer_2/modulate = Color(1, 1, 1, 0.619608)
+layer_2/y_sort_enabled = false
+layer_2/y_sort_origin = 0
+layer_2/z_index = 0
+layer_2/tile_data = PackedInt32Array()
+script = ExtResource("2_twpn4")
+map_size = Vector2(24, 16)
+map_name = "Crossing the Bridge"
+
+[node name="Units_Player" type="Node2D" parent="."]
+
+[node name="Unit_Player_1" parent="Units_Player" instance=ExtResource("3_wdipa")]
+position = Vector2(0, 208)
+character_class = ExtResource("4_bjb84")
+direction = "up"
+
+[node name="Unit_Player_2" parent="Units_Player" instance=ExtResource("3_wdipa")]
+position = Vector2(32, 208)
+character_class = ExtResource("5_y4vcg")
+direction = "up"
+
+[node name="Unit_Player_3" parent="Units_Player" instance=ExtResource("3_wdipa")]
+position = Vector2(64, 208)
+character_class = ExtResource("4_bjb84")
+direction = "up"
+
+[node name="Unit_Player_4" parent="Units_Player" instance=ExtResource("3_wdipa")]
+position = Vector2(16, 192)
+character_class = ExtResource("6_xj3x1")
+direction = "up"
+
+[node name="Unit_Player_5" parent="Units_Player" instance=ExtResource("3_wdipa")]
+position = Vector2(48, 192)
+character_class = ExtResource("6_xj3x1")
+direction = "up"
+
+[node name="Unit_Player_6" parent="Units_Player" instance=ExtResource("3_wdipa")]
+position = Vector2(0, 240)
+character_class = ExtResource("7_bhnnt")
+direction = "up"
+
+[node name="Unit_Player_7" parent="Units_Player" instance=ExtResource("3_wdipa")]
+position = Vector2(16, 224)
+character_class = ExtResource("8_et3lk")
+direction = "up"
+
+[node name="Unit_Player_8" parent="Units_Player" instance=ExtResource("3_wdipa")]
+position = Vector2(64, 240)
+character_class = ExtResource("7_bhnnt")
+direction = "up"
+
+[node name="Unit_Player_9" parent="Units_Player" instance=ExtResource("3_wdipa")]
+position = Vector2(48, 224)
+character_class = ExtResource("8_et3lk")
+direction = "up"
+
+[node name="Unit_Player_10" parent="Units_Player" instance=ExtResource("3_wdipa")]
+position = Vector2(32, 240)
+character_class = ExtResource("7_bhnnt")
+direction = "up"
+
+[node name="Units_Enemy" type="Node2D" parent="."]
+
+[node name="Unit_Enemy_1" parent="Units_Enemy" instance=ExtResource("3_wdipa")]
+position = Vector2(144, 112)
+character_class = ExtResource("6_xj3x1")
+team = 1
+direction = "left"
+
+[node name="Unit_Enemy_2" parent="Units_Enemy" instance=ExtResource("3_wdipa")]
+position = Vector2(144, 128)
+character_class = ExtResource("6_xj3x1")
+team = 1
+direction = "left"
+
+[node name="Unit_Enemy_3" parent="Units_Enemy" instance=ExtResource("3_wdipa")]
+position = Vector2(96, 160)
+character_class = ExtResource("6_xj3x1")
+team = 1
+direction = "left"
+
+[node name="Unit_Enemy_4" parent="Units_Enemy" instance=ExtResource("3_wdipa")]
+position = Vector2(80, 144)
+character_class = ExtResource("6_xj3x1")
+team = 1
+direction = "left"
+
+[node name="Unit_Enemy_5" parent="Units_Enemy" instance=ExtResource("3_wdipa")]
+position = Vector2(64, 128)
+character_class = ExtResource("6_xj3x1")
+team = 1
+direction = "left"
+
+[node name="Unit_Enemy_6" parent="Units_Enemy" instance=ExtResource("3_wdipa")]
+position = Vector2(240, 112)
+character_class = ExtResource("6_xj3x1")
+team = 1
+direction = "left"
+
+[node name="Unit_Enemy_7" parent="Units_Enemy" instance=ExtResource("3_wdipa")]
+position = Vector2(240, 128)
+character_class = ExtResource("6_xj3x1")
+team = 1
+direction = "left"
+
+[node name="Unit_Enemy_8" parent="Units_Enemy" instance=ExtResource("3_wdipa")]
+position = Vector2(320, 176)
+character_class = ExtResource("5_y4vcg")
+team = 1
+direction = "up"
+
+[node name="Unit_Enemy_9" parent="Units_Enemy" instance=ExtResource("3_wdipa")]
+position = Vector2(320, 96)
+character_class = ExtResource("8_et3lk")
+team = 1
+direction = "left"
+
+[node name="Unit_Enemy_10" parent="Units_Enemy" instance=ExtResource("3_wdipa")]
+position = Vector2(336, 144)
+character_class = ExtResource("4_bjb84")
+team = 1
+direction = "left"
+
+[node name="Unit_Enemy_11" parent="Units_Enemy" instance=ExtResource("3_wdipa")]
+position = Vector2(288, 80)
+character_class = ExtResource("4_bjb84")
+team = 1
+direction = "left"
+
+[node name="Unit_Enemy_12" parent="Units_Enemy" instance=ExtResource("3_wdipa")]
+position = Vector2(192, 144)
+character_class = ExtResource("8_et3lk")
+team = 1
+direction = "left"
+
+[node name="Unit_Enemy_13" parent="Units_Enemy" instance=ExtResource("3_wdipa")]
+position = Vector2(176, 112)
+character_class = ExtResource("6_xj3x1")
+team = 1
+direction = "left"
+
+[node name="Unit_Enemy_14" parent="Units_Enemy" instance=ExtResource("3_wdipa")]
+position = Vector2(176, 128)
+character_class = ExtResource("6_xj3x1")
+team = 1
+direction = "left"
+
+[node name="Unit_Enemy_15" parent="Units_Enemy" instance=ExtResource("3_wdipa")]
+position = Vector2(256, 112)
+character_class = ExtResource("8_et3lk")
+team = 1
+direction = "left"
+
+[node name="Unit_Enemy_16" parent="Units_Enemy" instance=ExtResource("3_wdipa")]
+position = Vector2(256, 128)
+character_class = ExtResource("8_et3lk")
+team = 1
+direction = "left"
+
+[node name="Unit_Enemy_17" parent="Units_Enemy" instance=ExtResource("3_wdipa")]
+position = Vector2(208, 96)
+character_class = ExtResource("8_et3lk")
+team = 1
+direction = "left"
+
+[node name="Unit_Enemy_18" parent="Units_Enemy" instance=ExtResource("3_wdipa")]
+position = Vector2(112, 16)
+character_class = ExtResource("4_bjb84")
+team = 1
+direction = "down"
+
+[node name="Unit_Enemy_19" parent="Units_Enemy" instance=ExtResource("3_wdipa")]
+position = Vector2(64, 32)
+character_class = ExtResource("4_bjb84")
+team = 1
+direction = "down"
+
+[node name="Unit_Enemy_20" parent="Units_Enemy" instance=ExtResource("3_wdipa")]
+position = Vector2(32, 16)
+character_class = ExtResource("4_bjb84")
+team = 1
+direction = "down"
+
+[node name="Unit_Enemy_21" parent="Units_Enemy" instance=ExtResource("3_wdipa")]
+position = Vector2(176, 208)
+character_class = ExtResource("4_bjb84")
+team = 1
+direction = "left"
+
+[node name="Unit_Enemy_22" parent="Units_Enemy" instance=ExtResource("3_wdipa")]
+position = Vector2(160, 224)
+character_class = ExtResource("4_bjb84")
+team = 1
+direction = "left"
+
+[node name="Unit_Enemy_23" parent="Units_Enemy" instance=ExtResource("3_wdipa")]
+position = Vector2(112, 144)
+character_class = ExtResource("8_et3lk")
+team = 1
+direction = "left"
+
+[node name="Unit_Enemy_24" parent="Units_Enemy" instance=ExtResource("3_wdipa")]
+position = Vector2(96, 128)
+character_class = ExtResource("8_et3lk")
+team = 1
+direction = "left"
+
+[node name="Unit_Enemy_25" parent="Units_Enemy" instance=ExtResource("3_wdipa")]
+position = Vector2(80, 112)
+character_class = ExtResource("8_et3lk")
+team = 1
+direction = "left"
+
+[node name="Movement_Preview" type="Line2D" parent="."]
+visible = false
+position = Vector2(8, 8)
+width = 4.0

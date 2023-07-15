@@ -18,20 +18,32 @@ func _calculate_combat_data(unit_1 : Unit, unit_2 : Unit):
 	
 	var unit_initiating_defence = _calculate_unit_defence(unit_1, unit_2)
 	var unit_target_defence = _calculate_unit_defence(unit_2, unit_1)
-	var initiating_avoid_chance = unit_1.avoid_chance
-	var target_avoid_chance = unit_2.avoid_chance
+	var initiating_avoid_chance = unit_1.avoid_chance + unit_1.avoid_chance_bonus
+	var target_avoid_chance = unit_2.avoid_chance + unit_2.avoid_chance_bonus
 	var initiating_weapon_advantage = _calculate_weapon_advantage(unit_1, unit_2)
 	var target_weapon_advantage = _calculate_weapon_advantage(unit_2, unit_1)
 	
-	#combat stats for initating unit
-	initiating_unit.hp = unit_1.hp_cur
-	initiating_unit.atk = int((unit_1.attack + unit_1.attack_bonus - unit_target_defence) * initiating_weapon_advantage)
-	initiating_unit.follow_up = _calculate_follow_up(unit_1, unit_2)
-	initiating_unit.hit_chance = clamp(unit_1.hit_chance - target_avoid_chance, 0, 100)
-	initiating_unit.crit_chance = clamp(unit_1.crit_chance, 0, 100)
-	
-	#if target unit is able to couter the attack
-	target_counter = _calculate_target_counter()
+	if unit_1.equipped_weapon.weapon_type.weapon_type_name != "Staff":
+		#combat stats for initating unit
+		initiating_unit.hp = unit_1.hp_cur
+		initiating_unit.atk = clamp(int((unit_1.attack + unit_1.attack_bonus - unit_target_defence) * initiating_weapon_advantage), 0, 999)
+		initiating_unit.follow_up = _calculate_follow_up(unit_1, unit_2)
+		initiating_unit.hit_chance = clamp(unit_1.hit_chance + unit_1.hit_chance_bonus - target_avoid_chance, 0, 100)
+		initiating_unit.crit_chance = clamp(unit_1.crit_chance + unit_1.crit_chance_bonus, 0, 100)
+		initiating_unit.hit_type = "damage"
+		
+		#if target unit is able to couter the attack
+		target_counter = _calculate_target_counter()
+	else:
+		#combat stats for initating unit
+		initiating_unit.hp = unit_1.hp_cur
+		initiating_unit.atk = initiating_unit.unit.heal_value
+		initiating_unit.follow_up = false
+		initiating_unit.hit_chance = 100
+		initiating_unit.crit_chance = 0
+		initiating_unit.hit_type = "heal"
+		
+		target_counter = false
 	
 	#combat stats for target_unit
 	target_unit.hp = unit_2.hp_cur
@@ -41,12 +53,13 @@ func _calculate_combat_data(unit_1 : Unit, unit_2 : Unit):
 		target_unit.crit_chance = 0
 		target_unit.follow_up = false
 	else:
-		target_unit.atk = int((unit_2.attack + unit_2.attack_bonus - unit_initiating_defence) * target_weapon_advantage)
-		target_unit.hit_chance = clamp(unit_2.hit_chance - initiating_avoid_chance, 0, 100)
-		target_unit.crit_chance = clamp(unit_2.crit_chance, 0, 100)
+		target_unit.atk = clamp(int((unit_2.attack + unit_2.attack_bonus - unit_initiating_defence) * target_weapon_advantage), 0, 999)
+		target_unit.hit_chance = clamp(unit_2.hit_chance + unit_2.hit_chance_bonus - initiating_avoid_chance, 0, 100)
+		target_unit.crit_chance = clamp(unit_2.crit_chance + unit_2.crit_chance_bonus, 0, 100)
 		target_unit.follow_up = _calculate_follow_up(unit_2, unit_1)
-	
+		
 	_calculate_action_order()
+
 
 #calculates the attack power of the unit based on its attack and the opposing defence value
 func _calculate_unit_defence(def_unit : Unit, atk_unit : Unit):
@@ -64,6 +77,7 @@ func _calculate_follow_up(unit_1 : Unit, unit_2: Unit):
 	else:
 		return false
 
+#calculates if the unit has a weapon advantage over the other
 func _calculate_weapon_advantage(unit_1 : Unit, unit_2 : Unit):
 	var unit_1_weapon = unit_1.equipped_weapon.weapon_type
 	var unit_2_weapon = unit_2.equipped_weapon.weapon_type
@@ -78,8 +92,11 @@ func _calculate_weapon_advantage(unit_1 : Unit, unit_2 : Unit):
 func _calculate_target_counter():
 	var distance_vector = initiating_unit.unit.unit_tile  - target_unit.unit.unit_tile
 	var distance = abs(distance_vector.x) + abs(distance_vector.y)
-	if distance >= target_unit.unit.equipped_weapon.min_range and distance <= target_unit.unit.equipped_weapon.max_range:
-		return true
+	if target_unit.unit.equipped_weapon.weapon_type.weapon_type_name != "Staff":
+		if distance >= target_unit.unit.equipped_weapon.min_range and distance <= target_unit.unit.equipped_weapon.max_range:
+			return true
+		else:
+			return false
 	else:
 		return false
 
@@ -95,4 +112,4 @@ func _calculate_action_order():
 	#target unit strikes a second time if able to counter and speed allows for it
 	if target_counter == true and target_unit.follow_up == true:
 		action_order.append(target_unit)
-	print(str(action_order))
+	#print(str(action_order))

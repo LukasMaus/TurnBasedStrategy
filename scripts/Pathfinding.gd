@@ -1,15 +1,18 @@
 extends TileMap
 
-@export var map_size = Vector2(18, 12)
+@export var map_size = Vector2(24, 16)
 var tile_size = Globals.TILE_SIZE
 var astar_grid
 
 @onready var movement_preview = $Movement_Preview
 
+@export var map_name : String
+
 func _ready():
 	_initialize_astargrid()
 	
 	Eventmanager.unitMove.connect(_on_unit_moved)
+	Eventmanager.unitKilled.connect(_on_unit_killed)
 
 func _initialize_astargrid():
 	astar_grid = AStarGrid2D.new()
@@ -54,7 +57,7 @@ func _set_solid_and_weighted_points(map_layer, tile_id):
 		#print("Set tile " + str(tile_id) + " to a weight of " + str(movement_cost) + ".")
 
 #sets units of the not active player to non passable tiles
-func _set_units_to_solid(units_pos_active, units_pos_inactive):
+func _set_units_to_solid(units_pos_active : Array, units_pos_inactive : Array):
 	for i in units_pos_active.size():
 		astar_grid.set_point_solid(units_pos_active[i], false)
 	for i in units_pos_inactive.size():
@@ -149,6 +152,9 @@ func _on_unit_moved(move_state):
 	else:
 		_clear_reachable_tiles()
 
+func _on_unit_killed(unit):
+	astar_grid.set_point_solid(unit.unit_tile, false)
+
 func _get_tile_information(tile_id):
 	var map_layer
 	if get_cell_source_id(1, tile_id) != -1:
@@ -163,6 +169,12 @@ func _get_tile_information(tile_id):
 	terrain_info.tile_id = tile_id
 	terrain_info.tile_name = tile_data.get_custom_data("name")
 	terrain_info.movement_cost = tile_data.get_custom_data("movement_cost")
-	terrain_info.buff_defence = tile_data.get_custom_data("buff_defence")
+	#checks for buffs on the terrain
+	terrain_info.buff_defence = tile_data.get_custom_data("buff_def/res")
 	terrain_info.buff_avoid = tile_data.get_custom_data("buff_avoid")
+	terrain_info.buff_dex = tile_data.get_custom_data("buff_dex")
+	#checks for debuffs on the terrain
+	terrain_info.debuff_resistance = tile_data.get_custom_data("debuff_res")
+	terrain_info.debuff_avoid = tile_data.get_custom_data("debuff_avoid")
+	terrain_info.debuff_dex = tile_data.get_custom_data("debuff_dex")
 	return terrain_info

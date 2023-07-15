@@ -123,15 +123,28 @@ text = "45"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HPBar" type="TextureProgressBar" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB"]
+[node name="HPBars" type="HBoxContainer" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="HPPlayer" type="TextureProgressBar" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB/HPBars"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(90, 4)
+custom_minimum_size = Vector2(45, 4)
 layout_mode = 2
 value = 50.0
-texture_under = ExtResource("3_7laax")
+fill_mode = 1
+nine_patch_stretch = true
 texture_progress = ExtResource("3_7laax")
-tint_under = Color(1, 0, 0, 1)
 tint_progress = Color(0, 0, 1, 1)
+
+[node name="HPEnemy" type="TextureProgressBar" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB/HPBars"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(45, 4)
+layout_mode = 2
+value = 50.0
+nine_patch_stretch = true
+texture_progress = ExtResource("3_7laax")
+tint_progress = Color(1, 0, 0, 1)
 
 [node name="Atk" type="HBoxContainer" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB"]
 layout_mode = 2
@@ -203,15 +216,28 @@ theme_override_font_sizes/font_size = 8
 text = "x2"
 horizontal_alignment = 2
 
-[node name="AtkBar" type="TextureProgressBar" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB"]
+[node name="AtkBars" type="HBoxContainer" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="AtkPlayer" type="TextureProgressBar" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB/AtkBars"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(90, 4)
+custom_minimum_size = Vector2(45, 4)
 layout_mode = 2
 value = 50.0
-texture_under = ExtResource("3_7laax")
+fill_mode = 1
+nine_patch_stretch = true
 texture_progress = ExtResource("3_7laax")
-tint_under = Color(1, 0, 0, 1)
 tint_progress = Color(0, 0, 1, 1)
+
+[node name="AtkEnemy" type="TextureProgressBar" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB/AtkBars"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(45, 4)
+layout_mode = 2
+value = 50.0
+nine_patch_stretch = true
+texture_progress = ExtResource("3_7laax")
+tint_progress = Color(1, 0, 0, 1)
 
 [node name="Hit" type="HBoxContainer" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB"]
 layout_mode = 2
@@ -257,15 +283,28 @@ text = "45"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HitBar" type="TextureProgressBar" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB"]
+[node name="HitBars" type="HBoxContainer" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="HitPlayer" type="TextureProgressBar" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB/HitBars"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(90, 4)
+custom_minimum_size = Vector2(45, 4)
 layout_mode = 2
 value = 50.0
-texture_under = ExtResource("3_7laax")
+fill_mode = 1
+nine_patch_stretch = true
 texture_progress = ExtResource("3_7laax")
-tint_under = Color(1, 0, 0, 1)
 tint_progress = Color(0, 0, 1, 1)
+
+[node name="HitEnemy" type="TextureProgressBar" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB/HitBars"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(45, 4)
+layout_mode = 2
+value = 50.0
+nine_patch_stretch = true
+texture_progress = ExtResource("3_7laax")
+tint_progress = Color(1, 0, 0, 1)
 
 [node name="Crit" type="HBoxContainer" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB"]
 layout_mode = 2
@@ -311,15 +350,28 @@ text = "45"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CritBar" type="TextureProgressBar" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB"]
+[node name="CritBars" type="HBoxContainer" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="CritPlayer" type="TextureProgressBar" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB/CritBars"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(90, 4)
+custom_minimum_size = Vector2(45, 4)
 layout_mode = 2
 value = 50.0
-texture_under = ExtResource("3_7laax")
+fill_mode = 1
+nine_patch_stretch = true
 texture_progress = ExtResource("3_7laax")
-tint_under = Color(1, 0, 0, 1)
 tint_progress = Color(0, 0, 1, 1)
+
+[node name="CritEnemy" type="TextureProgressBar" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB/HB/VB/CritBars"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(45, 4)
+layout_mode = 2
+value = 50.0
+nine_patch_stretch = true
+texture_progress = ExtResource("3_7laax")
+tint_progress = Color(1, 0, 0, 1)
 
 [node name="Seperator2" type="Label" parent="HB/LeftSideUI/MidLeftUI/CombatInfo/MC/VB"]
 layout_mode = 2
@@ -337,9 +389,9 @@ vertical_alignment = 1
 [node name="LowerLeftUI" type="MarginContainer" parent="HB/LeftSideUI"]
 custom_minimum_size = Vector2(0, 56)
 layout_mode = 2
-theme_override_constants/margin_left = 10
+theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 10
+theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
 [node name="TerrainInfo" type="Panel" parent="HB/LeftSideUI/LowerLeftUI"]
@@ -362,30 +414,57 @@ theme_override_constants/margin_bottom = 2
 layout_mode = 2
 theme_override_constants/separation = 1
 
-[node name="TerrainName" type="Label" parent="HB/LeftSideUI/LowerLeftUI/TerrainInfo/MC/VB"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HB/LeftSideUI/LowerLeftUI/TerrainInfo/MC/VB"]
+layout_mode = 2
+
+[node name="TerrainName" type="Label" parent="HB/LeftSideUI/LowerLeftUI/TerrainInfo/MC/VB/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_jkjtb")
 theme_override_font_sizes/font_size = 16
 text = "grass"
 
-[node name="OtherValues" type="HBoxContainer" parent="HB/LeftSideUI/LowerLeftUI/TerrainInfo/MC/VB"]
-layout_mode = 2
-theme_override_constants/separation = 1
-
-[node name="TerrainMovCost" type="Label" parent="HB/LeftSideUI/LowerLeftUI/TerrainInfo/MC/VB/OtherValues"]
+[node name="TerrainMovCost" type="Label" parent="HB/LeftSideUI/LowerLeftUI/TerrainInfo/MC/VB/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_ftkd0")
 theme_override_font_sizes/font_size = 8
 text = "Mov:"
 vertical_alignment = 1
 
-[node name="TerrainMovCostValue" type="Label" parent="HB/LeftSideUI/LowerLeftUI/TerrainInfo/MC/VB/OtherValues"]
+[node name="TerrainMovCostValue" type="Label" parent="HB/LeftSideUI/LowerLeftUI/TerrainInfo/MC/VB/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_ftkd0")
 theme_override_font_sizes/font_size = 8
 text = "1"
+vertical_alignment = 1
+
+[node name="OtherValues" type="HBoxContainer" parent="HB/LeftSideUI/LowerLeftUI/TerrainInfo/MC/VB"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Impassable" type="Label" parent="HB/LeftSideUI/LowerLeftUI/TerrainInfo/MC/VB/OtherValues"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 8
+vertical_alignment = 1
+
+[node name="TerrainBuff" type="Label" parent="HB/LeftSideUI/LowerLeftUI/TerrainInfo/MC/VB/OtherValues"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 8
+text = "Def/Res:"
+vertical_alignment = 1
+
+[node name="TerrainBuffValue" type="Label" parent="HB/LeftSideUI/LowerLeftUI/TerrainInfo/MC/VB/OtherValues"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 8
+text = "+5"
 vertical_alignment = 1
 
 [node name="TerrainSeperator" type="Label" parent="HB/LeftSideUI/LowerLeftUI/TerrainInfo/MC/VB/OtherValues"]
@@ -398,20 +477,20 @@ text = "|"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TerrainBuff" type="Label" parent="HB/LeftSideUI/LowerLeftUI/TerrainInfo/MC/VB/OtherValues"]
+[node name="TerrainDebuff" type="Label" parent="HB/LeftSideUI/LowerLeftUI/TerrainInfo/MC/VB/OtherValues"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_ftkd0")
 theme_override_font_sizes/font_size = 8
-text = "Avoid:"
+text = "Avo:"
 vertical_alignment = 1
 
-[node name="TerrainBuffValue" type="Label" parent="HB/LeftSideUI/LowerLeftUI/TerrainInfo/MC/VB/OtherValues"]
+[node name="TerrainDebuffValue" type="Label" parent="HB/LeftSideUI/LowerLeftUI/TerrainInfo/MC/VB/OtherValues"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_ftkd0")
 theme_override_font_sizes/font_size = 8
-text = "+5"
+text = "-10"
 vertical_alignment = 1
 
 [node name="MidUI" type="VBoxContainer" parent="HB"]
@@ -538,6 +617,26 @@ vertical_alignment = 1
 [node name="GameWindow" type="MarginContainer" parent="HB/MidUI"]
 custom_minimum_size = Vector2(0, 256)
 layout_mode = 2
+theme_override_constants/margin_left = 120
+theme_override_constants/margin_top = 90
+theme_override_constants/margin_right = 120
+theme_override_constants/margin_bottom = 90
+
+[node name="MenuScreen" type="VBoxContainer" parent="HB/MidUI/GameWindow"]
+unique_name_in_owner = true
+process_mode = 3
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HB/MidUI/GameWindow/MenuScreen"]
+layout_mode = 2
+text = "Pause"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="HB/MidUI/GameWindow/MenuScreen"]
+layout_mode = 2
+theme = ExtResource("2_apr58")
+text = "Main Menu"
 
 [node name="LowerMidUI" type="MarginContainer" parent="HB/MidUI"]
 custom_minimum_size = Vector2(0, 56)
@@ -724,231 +823,294 @@ vertical_alignment = 1
 [node name="Stats" type="MarginContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="VB" type="VBoxContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats"]
+[node name="HB" type="HBoxContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats"]
 layout_mode = 2
 
-[node name="HB" type="HBoxContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB"]
+[node name="VB1" type="VBoxContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/HB"]
 layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Atk" type="HBoxContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/HB/VB1"]
+layout_mode = 2
+tooltip_text = "Determines base damage per attack against an enemy."
 theme_override_constants/separation = 0
 
-[node name="StatName" type="VBoxContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB"]
-custom_minimum_size = Vector2(25, 0)
-layout_mode = 2
-size_flags_horizontal = 2
-
-[node name="Atk" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB/StatName"]
+[node name="Name" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/HB/VB1/Atk"]
 custom_minimum_size = Vector2(25, 15)
 layout_mode = 2
-tooltip_text = "Affects damage the unit inflicts per hit."
 mouse_filter = 0
 theme_override_fonts/font = ExtResource("4_ftkd0")
 theme_override_font_sizes/font_size = 8
 text = "Atk:"
 vertical_alignment = 1
 
-[node name="Dex" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB/StatName"]
+[node name="Atk" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/HB/VB1/Atk"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(25, 15)
 layout_mode = 2
-tooltip_text = "Affects hit and critical chances of the unit."
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 8
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Separator" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/HB/VB1/Atk"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "|"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Dex" type="HBoxContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/HB/VB1"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+tooltip_text = "Determines base chance to hit and to critical strike an enemy."
+theme_override_constants/separation = 0
+
+[node name="Name" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/HB/VB1/Dex"]
+custom_minimum_size = Vector2(25, 15)
+layout_mode = 2
 mouse_filter = 0
 theme_override_fonts/font = ExtResource("4_ftkd0")
 theme_override_font_sizes/font_size = 8
 text = "Dex:"
 vertical_alignment = 1
 
-[node name="Spd" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB/StatName"]
+[node name="Dex" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/HB/VB1/Dex"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(25, 15)
 layout_mode = 2
-tooltip_text = "Affects chance to avoid enemy hits and attack twice per combat."
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 8
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Separator" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/HB/VB1/Dex"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "|"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spd" type="HBoxContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/HB/VB1"]
+layout_mode = 2
+tooltip_text = "Determines base chance to avoid an enemy attack.
+Unit does an additional attack if own speed is at least 5 higher than enemy speed."
+theme_override_constants/separation = 0
+
+[node name="Name" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/HB/VB1/Spd"]
+custom_minimum_size = Vector2(25, 15)
+layout_mode = 2
 mouse_filter = 0
 theme_override_fonts/font = ExtResource("4_ftkd0")
 theme_override_font_sizes/font_size = 8
 text = "Spd:"
 vertical_alignment = 1
 
-[node name="Def" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB/StatName"]
+[node name="Spd" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/HB/VB1/Spd"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(25, 15)
 layout_mode = 2
-tooltip_text = "Lowers incoming physical damage."
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 8
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Separator" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/HB/VB1/Spd"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "|"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Def" type="HBoxContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/HB/VB1"]
+layout_mode = 2
+tooltip_text = "Determines how much physical damage is negated per hit."
+theme_override_constants/separation = 0
+
+[node name="Name" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/HB/VB1/Def"]
+custom_minimum_size = Vector2(25, 15)
+layout_mode = 2
 mouse_filter = 0
 theme_override_fonts/font = ExtResource("4_ftkd0")
 theme_override_font_sizes/font_size = 8
 text = "Def:"
 vertical_alignment = 1
 
-[node name="Res" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB/StatName"]
+[node name="Def" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/HB/VB1/Def"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(25, 15)
 layout_mode = 2
-tooltip_text = "Lowers incoming magical damage."
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 8
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Separator" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/HB/VB1/Def"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "|"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Res" type="HBoxContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/HB/VB1"]
+layout_mode = 2
+tooltip_text = "Determines how much magical damage is negated per hit."
+theme_override_constants/separation = 0
+
+[node name="Name" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/HB/VB1/Res"]
+custom_minimum_size = Vector2(25, 15)
+layout_mode = 2
 mouse_filter = 0
 theme_override_fonts/font = ExtResource("4_ftkd0")
 theme_override_font_sizes/font_size = 8
 text = "Res:"
 vertical_alignment = 1
 
-[node name="Mov" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB/StatName"]
-custom_minimum_size = Vector2(25, 15)
-layout_mode = 2
-tooltip_text = "Affects how far the unit can move per turn."
-mouse_filter = 0
-theme_override_fonts/font = ExtResource("4_ftkd0")
-theme_override_font_sizes/font_size = 8
-text = "Mov:"
-vertical_alignment = 1
-
-[node name="StatUnit" type="VBoxContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB"]
-custom_minimum_size = Vector2(30, 0)
-layout_mode = 2
-size_flags_horizontal = 4
-
-[node name="Atk" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB/StatUnit"]
+[node name="Res" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/HB/VB1/Res"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(25, 15)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_ftkd0")
 theme_override_font_sizes/font_size = 8
-text = "20"
+text = "2"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Dex" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB/StatUnit"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(25, 15)
+[node name="Separator" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/HB/VB1/Res"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("4_ftkd0")
 theme_override_font_sizes/font_size = 8
-text = "14"
+text = "|"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Spd" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB/StatUnit"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(25, 15)
+[node name="Range" type="HBoxContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/HB/VB1"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("4_ftkd0")
-theme_override_font_sizes/font_size = 8
-text = "16"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Def" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB/StatUnit"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(25, 15)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_ftkd0")
-theme_override_font_sizes/font_size = 8
-text = "12"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Res" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB/StatUnit"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(25, 15)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_ftkd0")
-theme_override_font_sizes/font_size = 8
-text = "8"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Mov" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB/StatUnit"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(25, 15)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_ftkd0")
-theme_override_font_sizes/font_size = 8
-text = "3"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="StatBonus" type="VBoxContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB"]
-custom_minimum_size = Vector2(30, 0)
-layout_mode = 2
-size_flags_horizontal = 8
-
-[node name="AtkBonus" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB/StatBonus"]
-unique_name_in_owner = true
-modulate = Color(0, 0.803922, 0.219608, 1)
-custom_minimum_size = Vector2(25, 15)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_ftkd0")
-theme_override_font_sizes/font_size = 8
-text = "+8"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="DexBonus" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB/StatBonus"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(25, 15)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_ftkd0")
-theme_override_font_sizes/font_size = 8
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="SpdBonus" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB/StatBonus"]
-unique_name_in_owner = true
-modulate = Color(0.87451, 0, 0.12549, 1)
-custom_minimum_size = Vector2(25, 15)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_ftkd0")
-theme_override_font_sizes/font_size = 8
-text = "-5"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="DefBonus" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB/StatBonus"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(25, 15)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_ftkd0")
-theme_override_font_sizes/font_size = 8
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ResBonus" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB/StatBonus"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(25, 15)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_ftkd0")
-theme_override_font_sizes/font_size = 8
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="MovBonus" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB/StatBonus"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(25, 15)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_ftkd0")
-theme_override_font_sizes/font_size = 8
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HB2" type="HBoxContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB"]
-layout_mode = 2
+tooltip_text = "Determines how far a unit can attack with the currently equipped weapon."
 theme_override_constants/separation = 0
 
-[node name="Range" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB2"]
+[node name="Name" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/HB/VB1/Range"]
 custom_minimum_size = Vector2(25, 15)
 layout_mode = 2
-tooltip_text = "Affects how far the weapon can attack."
 mouse_filter = 0
 theme_override_fonts/font = ExtResource("4_ftkd0")
 theme_override_font_sizes/font_size = 8
 text = "Ran:"
 vertical_alignment = 1
 
-[node name="RangeValue" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/VB/HB2"]
+[node name="Range" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/HB/VB1/Range"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(25, 15)
 layout_mode = 2
-size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("4_ftkd0")
 theme_override_font_sizes/font_size = 8
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Separator" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/HB/VB1/Range"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "|"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VB2" type="VBoxContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/HB"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = 0
+
+[node name="Separator" type="Control" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/HB/VB2"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+
+[node name="HitRate" type="VBoxContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/HB/VB2"]
+layout_mode = 2
+tooltip_text = "Chance to hit the enemy with an attack."
+theme_override_constants/separation = 0
+
+[node name="Name" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/HB/VB2/HitRate"]
+custom_minimum_size = Vector2(25, 15)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 8
+text = "Hit"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HitRate" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/HB/VB2/HitRate"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(25, 15)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 8
+text = "80"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Separator2" type="Control" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/HB/VB2"]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+
+[node name="Avoid" type="VBoxContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/HB/VB2"]
+layout_mode = 2
+tooltip_text = "Chance to avoid an enemy hit."
+theme_override_constants/separation = 0
+
+[node name="Name" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/HB/VB2/Avoid"]
+custom_minimum_size = Vector2(25, 15)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 8
+text = "Avo"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Avoid" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/HB/VB2/Avoid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(25, 15)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 8
+text = "50"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Separator3" type="Control" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/HB/VB2"]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+
+[node name="Crit" type="VBoxContainer" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/HB/VB2"]
+layout_mode = 2
+tooltip_text = "Chance per hit to inflict double damage."
+theme_override_constants/separation = 0
+
+[node name="Name" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/HB/VB2/Crit"]
+custom_minimum_size = Vector2(25, 15)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 8
+text = "Crit"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CritRate" type="Label" parent="HB/RightSideUI/MidRightUI/UnitInfo/MC/VB/Stats/HB/VB2/Crit"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(25, 15)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ftkd0")
+theme_override_font_sizes/font_size = 8
+text = "20"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -967,6 +1129,7 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("4_ftkd0")
 text = "End Turn"
 
+[connection signal="pressed" from="HB/MidUI/GameWindow/MenuScreen/Button" to="." method="_on_main_menu_pressed"]
 [connection signal="pressed" from="HB/MidUI/LowerMidUI/ActionMenu/Weapon1" to="." method="_on_weapon_pressed" binds= [1]]
 [connection signal="pressed" from="HB/MidUI/LowerMidUI/ActionMenu/Weapon2" to="." method="_on_weapon_pressed" binds= [2]]
 [connection signal="pressed" from="HB/MidUI/LowerMidUI/ActionMenu/Heal" to="." method="_on_heal_pressed"]

@@ -1,22 +1,28 @@
-[gd_scene load_steps=5 format=3 uid="uid://620ylgai7fd0"]
+[gd_scene load_steps=4 format=3 uid="uid://cichjnk047h6f"]
 
 [ext_resource type="Script" path="res://scripts/GameScene.gd" id="1_1b080"]
-[ext_resource type="PackedScene" uid="uid://mn8cuh5rmtbd" path="res://scenes/maps/Map.tscn" id="2_0d1le"]
 [ext_resource type="PackedScene" uid="uid://dvba342vqjumk" path="res://scenes/HUD.tscn" id="2_rmu25"]
 [ext_resource type="Texture2D" uid="uid://ykqdpuve20gp" path="res://assets/ui/SelectionCursor.png" id="3_81ofb"]
 
 [node name="GameScene" type="Node2D"]
+process_mode = 3
 script = ExtResource("1_1b080")
+defence_buff_value = 3
+resistance_debuff_value = 5
+avoid_buff_value = 30
+avoid_debuff_value = 10
+dex_buff_value = 3
+dex_debuff_value = 3
+critical_multiplier_value = 2
 
 [node name="HUD" parent="." instance=ExtResource("2_rmu25")]
+process_mode = 1
 
-[node name="Map" parent="." instance=ExtResource("2_0d1le")]
+[node name="Camera" type="Camera2D" parent="."]
+offset = Vector2(192, 132)
 
 [node name="Cursor" type="Sprite2D" parent="."]
 texture = ExtResource("3_81ofb")
 offset = Vector2(8, 8)
 region_enabled = true
 region_rect = Rect2(0, 0, 32, 32)
-
-[node name="Camera" type="Camera2D" parent="."]
-offset = Vector2(192, 132)
