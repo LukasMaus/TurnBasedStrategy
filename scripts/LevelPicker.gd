@@ -9,7 +9,7 @@ var selected_map : Map_Data
 @onready var level_name = get_node("%LevelName")
 @onready var levels = get_node("%Levels")
 
-@export var pages_number = 1
+@export var pages_number = 3
 @onready var current_page = 1
 
 func _on_exit_pressed():
@@ -48,7 +48,9 @@ func _set_page_data():
 			level_type.text = "Training:"
 		2:
 			level_type.text = "Challanges:"
-	
+		3:
+			level_type.text = "AI Tests"
+		
 	if selected_map != null:
 		level_name.text = selected_map.map_name
 	

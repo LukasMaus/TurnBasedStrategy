@@ -30,8 +30,8 @@ layer_2/y_sort_origin = 0
 layer_2/z_index = 0
 layer_2/tile_data = PackedInt32Array()
 script = ExtResource("2_sxaba")
-map_size = Vector2(24, 16)
 map_name = "The Final Battle"
+red_player_control = "AI"
 
 [node name="Units_Player" type="Node2D" parent="."]
 
@@ -146,193 +146,187 @@ direction = "up"
 [node name="Unit_Enemy_1" parent="Units_Enemy" instance=ExtResource("3_iilro")]
 position = Vector2(320, 16)
 character_class = ExtResource("8_ggto7")
-team = 1
+behaviour = 2
 direction = "down"
 
 [node name="Unit_Enemy_2" parent="Units_Enemy" instance=ExtResource("3_iilro")]
 position = Vector2(224, 128)
 character_class = ExtResource("8_ggto7")
-team = 1
+behaviour = 1
 direction = "down"
 
 [node name="Unit_Enemy_3" parent="Units_Enemy" instance=ExtResource("3_iilro")]
 position = Vector2(32, 32)
 character_class = ExtResource("8_ggto7")
-team = 1
+behaviour = 1
 direction = "down"
 
 [node name="Unit_Enemy_4" parent="Units_Enemy" instance=ExtResource("3_iilro")]
 position = Vector2(80, 32)
 character_class = ExtResource("8_ggto7")
-team = 1
+behaviour = 1
 direction = "down"
 
 [node name="Unit_Enemy_5" parent="Units_Enemy" instance=ExtResource("3_iilro")]
 position = Vector2(16, 80)
 character_class = ExtResource("6_nocm6")
-team = 1
+behaviour = 1
 direction = "down"
 
 [node name="Unit_Enemy_6" parent="Units_Enemy" instance=ExtResource("3_iilro")]
 position = Vector2(160, 112)
 character_class = ExtResource("6_nocm6")
-team = 1
+behaviour = 2
 direction = "down"
 
 [node name="Unit_Enemy_7" parent="Units_Enemy" instance=ExtResource("3_iilro")]
 position = Vector2(144, 112)
 character_class = ExtResource("6_nocm6")
-team = 1
+behaviour = 2
 direction = "down"
 
 [node name="Unit_Enemy_8" parent="Units_Enemy" instance=ExtResource("3_iilro")]
 position = Vector2(160, 160)
 character_class = ExtResource("6_nocm6")
-team = 1
+behaviour = 2
 direction = "down"
 
 [node name="Unit_Enemy_9" parent="Units_Enemy" instance=ExtResource("3_iilro")]
 position = Vector2(144, 160)
 character_class = ExtResource("6_nocm6")
-team = 1
+behaviour = 2
 direction = "down"
 
 [node name="Unit_Enemy_10" parent="Units_Enemy" instance=ExtResource("3_iilro")]
 position = Vector2(32, 144)
 character_class = ExtResource("4_ocdvx")
-team = 1
+behaviour = 2
 direction = "down"
 
 [node name="Unit_Enemy_11" parent="Units_Enemy" instance=ExtResource("3_iilro")]
 position = Vector2(208, 80)
 character_class = ExtResource("4_ocdvx")
-team = 1
+behaviour = 2
 direction = "left"
 
 [node name="Unit_Enemy_12" parent="Units_Enemy" instance=ExtResource("3_iilro")]
 position = Vector2(208, 64)
 character_class = ExtResource("4_ocdvx")
-team = 1
+behaviour = 2
 direction = "left"
 
 [node name="Unit_Enemy_13" parent="Units_Enemy" instance=ExtResource("3_iilro")]
 position = Vector2(256, 80)
 character_class = ExtResource("4_ocdvx")
-team = 1
+behaviour = 2
 direction = "left"
 
 [node name="Unit_Enemy_14" parent="Units_Enemy" instance=ExtResource("3_iilro")]
 position = Vector2(256, 64)
 character_class = ExtResource("4_ocdvx")
-team = 1
+behaviour = 2
 direction = "left"
 
 [node name="Unit_Enemy_15" parent="Units_Enemy" instance=ExtResource("3_iilro")]
 position = Vector2(64, 112)
 character_class = ExtResource("4_ocdvx")
-team = 1
 direction = "down"
 
 [node name="Unit_Enemy_16" parent="Units_Enemy" instance=ExtResource("3_iilro")]
 position = Vector2(64, 112)
 character_class = ExtResource("4_ocdvx")
-team = 1
 direction = "down"
 
 [node name="Unit_Enemy_17" parent="Units_Enemy" instance=ExtResource("3_iilro")]
 position = Vector2(336, 208)
 character_class = ExtResource("4_ocdvx")
-team = 1
 direction = "down"
 
 [node name="Unit_Enemy_18" parent="Units_Enemy" instance=ExtResource("3_iilro")]
 position = Vector2(304, 48)
 character_class = ExtResource("5_n5c63")
-team = 1
+behaviour = 1
 direction = "down"
 
 [node name="Unit_Enemy_19" parent="Units_Enemy" instance=ExtResource("3_iilro")]
 position = Vector2(336, 48)
 character_class = ExtResource("5_n5c63")
-team = 1
+behaviour = 1
 direction = "down"
 
 [node name="Unit_Enemy_20" parent="Units_Enemy" instance=ExtResource("3_iilro")]
 position = Vector2(352, 192)
 character_class = ExtResource("5_n5c63")
-team = 1
 direction = "down"
 
 [node name="Unit_Enemy_21" parent="Units_Enemy" instance=ExtResource("3_iilro")]
 position = Vector2(304, 160)
 character_class = ExtResource("5_n5c63")
-team = 1
 direction = "down"
 
 [node name="Unit_Enemy_22" parent="Units_Enemy" instance=ExtResource("3_iilro")]
 position = Vector2(80, 144)
 character_class = ExtResource("5_n5c63")
-team = 1
 direction = "down"
 
 [node name="Unit_Enemy_23" parent="Units_Enemy" instance=ExtResource("3_iilro")]
 position = Vector2(144, 48)
 character_class = ExtResource("5_n5c63")
-team = 1
+behaviour = 2
 direction = "down"
 
 [node name="Unit_Enemy_24" parent="Units_Enemy" instance=ExtResource("3_iilro")]
 position = Vector2(96, 192)
 character_class = ExtResource("7_f743p")
-team = 1
+behaviour = 1
 direction = "down"
 
 [node name="Unit_Enemy_25" parent="Units_Enemy" instance=ExtResource("3_iilro")]
 position = Vector2(144, 192)
 character_class = ExtResource("7_f743p")
-team = 1
+behaviour = 1
 direction = "down"
 
 [node name="Unit_Enemy_26" parent="Units_Enemy" instance=ExtResource("3_iilro")]
 position = Vector2(288, 32)
 character_class = ExtResource("7_f743p")
-team = 1
+behaviour = 1
 direction = "down"
 
 [node name="Unit_Enemy_27" parent="Units_Enemy" instance=ExtResource("3_iilro")]
 position = Vector2(352, 32)
 character_class = ExtResource("7_f743p")
-team = 1
+behaviour = 1
 direction = "down"
 
 [node name="Unit_Enemy_28" parent="Units_Enemy" instance=ExtResource("3_iilro")]
 position = Vector2(192, 192)
 character_class = ExtResource("7_f743p")
-team = 1
+behaviour = 1
 direction = "down"
 
 [node name="Unit_Enemy_29" parent="Units_Enemy" instance=ExtResource("3_iilro")]
 position = Vector2(48, 64)
 character_class = ExtResource("7_f743p")
-team = 1
+behaviour = 1
 direction = "down"
 
 [node name="Unit_Enemy_30" parent="Units_Enemy" instance=ExtResource("3_iilro")]
 position = Vector2(320, 112)
 character_class = ExtResource("7_f743p")
-team = 1
+behaviour = 1
 direction = "down"
 
 [node name="Unit_Enemy_31" parent="Units_Enemy" instance=ExtResource("3_iilro")]
 position = Vector2(128, 80)
 character_class = ExtResource("7_f743p")
-team = 1
+behaviour = 1
 direction = "down"
 
 [node name="Unit_Enemy_32" parent="Units_Enemy" instance=ExtResource("3_iilro")]
 position = Vector2(256, 176)
 character_class = ExtResource("7_f743p")
-team = 1
+behaviour = 1
 direction = "down"
 
 [node name="Movement_Preview" type="Line2D" parent="."]

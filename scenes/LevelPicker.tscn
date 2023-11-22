@@ -12,7 +12,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_8upjy")
-pages_number = 2
 
 [node name="MC" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -29,11 +28,11 @@ theme_override_constants/margin_bottom = 5
 [node name="VB" type="VBoxContainer" parent="MC"]
 layout_mode = 2
 
-[node name="Title2" type="HBoxContainer" parent="MC/VB"]
+[node name="Title" type="HBoxContainer" parent="MC/VB"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
-[node name="LevelType" type="Label" parent="MC/VB/Title2"]
+[node name="LevelType" type="Label" parent="MC/VB/Title"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
@@ -41,7 +40,7 @@ theme = ExtResource("2_k6n2o")
 text = "Training:"
 vertical_alignment = 1
 
-[node name="LevelName" type="Label" parent="MC/VB/Title2"]
+[node name="LevelName" type="Label" parent="MC/VB/Title"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("2_k6n2o")

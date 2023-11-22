@@ -30,8 +30,8 @@ layer_2/y_sort_origin = 0
 layer_2/z_index = 0
 layer_2/tile_data = PackedInt32Array()
 script = ExtResource("2_513b8")
-map_size = Vector2(24, 16)
 map_name = "Terrain"
+red_player_control = "AI"
 
 [node name="Units_Player" type="Node2D" parent="."]
 
@@ -43,12 +43,12 @@ resistance = 12
 direction = "left"
 
 [node name="Unit_Player_2" parent="Units_Player" instance=ExtResource("3_gnk31")]
-position = Vector2(304, 64)
+position = Vector2(304, 48)
 character_class = ExtResource("5_1vw2b")
 direction = "left"
 
 [node name="Unit_Player_3" parent="Units_Player" instance=ExtResource("3_gnk31")]
-position = Vector2(176, 160)
+position = Vector2(176, 144)
 character_class = ExtResource("8_vlmec")
 hp_max = 33
 direction = "left"
@@ -62,14 +62,14 @@ character_class = ExtResource("4_4erjg")
 [node name="Unit_Enemy_1" parent="Units_Enemy" instance=ExtResource("3_gnk31")]
 position = Vector2(160, 48)
 character_class = ExtResource("7_ffxak")
-team = 1
+behaviour = 2
 attack = 30
 direction = "left"
 
 [node name="Unit_Enemy_2" parent="Units_Enemy" instance=ExtResource("3_gnk31")]
 position = Vector2(288, 48)
 character_class = ExtResource("7_ffxak")
-team = 1
+behaviour = 2
 hp_max = 30
 attack = 28
 dexterity = 12
@@ -79,13 +79,13 @@ direction = "right"
 [node name="Unit_Enemy_3" parent="Units_Enemy" instance=ExtResource("3_gnk31")]
 position = Vector2(144, 160)
 character_class = ExtResource("8_vlmec")
-team = 1
+behaviour = 2
 hp_max = 30
 
 [node name="Unit_Enemy_4" parent="Units_Enemy" instance=ExtResource("3_gnk31")]
 position = Vector2(256, 128)
 character_class = ExtResource("4_4erjg")
-team = 1
+behaviour = 2
 direction = "right"
 
 [node name="Movement_Preview" type="Line2D" parent="."]

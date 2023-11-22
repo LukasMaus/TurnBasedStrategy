@@ -8,3 +8,4 @@ var hit_chance : int
 var crit_chance : int
 var follow_up : bool
 var hit_type : String
+var evaluation_score : int

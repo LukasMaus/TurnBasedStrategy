@@ -12,10 +12,11 @@ extends CanvasLayer
 @onready var unit_info = get_node("%UnitInfo")
 @onready var combat_info = get_node("%CombatInfo")
 @onready var menu_screen = get_node("%MenuScreen")
+@onready var evaluation = get_node("%Evaluation")
 
 #ui colors
-@onready var player_color = Color("#2e43fb")
-@onready var enemy_color = Color("#df0020")
+@onready var player_1_color = Color("#2e43fb")
+@onready var player_2_color = Color("#df0020")
 @onready var buff_color = Color("#00cd38")
 @onready var debuff_color = Color("#df0020")
 @onready var neutral_color = Color("#ffffff")
@@ -23,7 +24,7 @@ extends CanvasLayer
 
 var selected_unit : Unit
 var hovered_unit : Unit
-var active_player
+var active_player : Player
 @onready var in_action_mode = false
 @onready var in_attack_mode = false
 
@@ -35,18 +36,23 @@ func _ready():
 	Eventmanager.gameEnded.connect(_on_game_ended)
 
 #gets called in _ready() function of GameScene
-func _initialize_ui(p_unit_count, e_unit_count):
-	player_units.modulate = player_color
+func _initialize_ui(debug_mode, starting_player, p_unit_count, e_unit_count):
+	active_player = starting_player
+	player_units.modulate = player_1_color
 	player_units_count.text = str(p_unit_count)
-	player_units_count.modulate = player_color
-	enemy_units.modulate = enemy_color
+	player_units_count.modulate = player_1_color
+	enemy_units.modulate = player_2_color
 	enemy_units_count.text = str(e_unit_count)
-	enemy_units_count.modulate = enemy_color
+	enemy_units_count.modulate = player_2_color
 	menu_screen.visible = false
+	if debug_mode == true:
+		evaluation.visible = true
+		get_node("%TerrainSeperator2").visible = true
+		get_node("%Threat").visible = true
 	_toggle_action_menu(false)
 	_toggle_unit_info()
 	_toggle_combat_preview()
-	_on_next_turn_started(0)
+	_on_next_turn_started(active_player)
 
 func _on_game_ended(winningPlayerNumber):
 	var text
@@ -76,7 +82,7 @@ func _toggle_menu_button():
 	get_tree().paused = not get_tree().paused
 
 func _toggle_action_menu(visibility_state : bool):
-	if visibility_state == true and selected_unit.team == active_player and selected_unit.already_acted == false:
+	if visibility_state == true and selected_unit.player == active_player and active_player.control == "Player" and selected_unit.already_acted == false:
 		var heal_uses = selected_unit.heal_uses
 		if heal_uses == 0 or selected_unit.hp_cur == selected_unit.hp_max:
 			_disable_button(get_node("%Heal"), true)
@@ -93,6 +99,9 @@ func _toggle_action_menu(visibility_state : bool):
 	else:
 		action_menu.visible = false
 
+func _toggle_end_turn_button(visibility_state : bool):
+	end_turn.visible = visibility_state
+
 func _select_unit(unit):
 	selected_unit = unit
 	_toggle_action_menu(true)
@@ -108,7 +117,7 @@ func _on_hover_unit(unit):
 	hovered_unit = unit
 	_update_stat_info("all")
 	_toggle_unit_info()
-	if in_attack_mode == true and selected_unit.team != hovered_unit.team:
+	if in_attack_mode == true and selected_unit.player != hovered_unit.player:
 		_set_combat_preview(selected_unit, hovered_unit)
 		_toggle_combat_preview()
 
@@ -145,9 +154,11 @@ func _set_in_action_mode(action_mode_state : bool):
 	if in_action_mode == true:
 		action_menu.visible = false
 		end_turn.visible = false
-	else:
+	elif active_player.control == "Player":
 		action_menu.visible = true
 		end_turn.visible = true
+	else:
+		pass
 
 func _set_in_attack_mode(attack_mode_state : bool):
 	in_attack_mode = attack_mode_state
@@ -189,13 +200,17 @@ func _update_unit_count(player, amount):
 
 func _on_next_turn_started(next_player):
 	active_player = next_player
-	match active_player:
-		0:
-			_update_player_info("Player Turn")
-			player_info.modulate = player_color
-		1: 
-			_update_player_info("Enemy Turn")
-			player_info.modulate = enemy_color
+	if active_player.control == "Player":
+		_update_player_info("Player Turn")
+		_toggle_end_turn_button(true)
+	else:
+		_update_player_info("AI Turn")
+		_toggle_action_menu(false)
+		_toggle_end_turn_button(false)
+	if player_info.modulate == player_1_color:
+		player_info.modulate = player_2_color
+	else:
+		player_info.modulate = player_1_color
 
 func _on_end_turn_pressed():
 	Eventmanager.emit_signal("endTurn")
@@ -302,6 +317,8 @@ func _update_terrain_info(terrain_information : Terrain_Info):
 		get_node("%TerrainMovCostValue").text = str(terrain_information.movement_cost)
 		get_node("%Impassable").text = ""
 	
+	get_node("%Threat").text = str(terrain_information.threat)
+	
 	#sets values for buff label
 	if terrain_information.buff_defence == true:
 		buff_active = true
@@ -347,8 +364,10 @@ func _update_terrain_info(terrain_information : Terrain_Info):
 func _toggle_combat_preview():
 	if selected_unit != null and hovered_unit != null:
 		combat_info.visible = true
+		evaluation.visible = true
 	else:
 		combat_info.visible = false
+		evaluation.visible = false
 
 func _set_combat_preview(unit_player, unit_enemy):
 	var combat_data = Combat_Data.new()
@@ -365,6 +384,7 @@ func _set_combat_preview(unit_player, unit_enemy):
 	get_node("%EnemyAtk").text = str(combat_data.target_unit.atk)
 	get_node("%EnemyHit").text = str(combat_data.target_unit.hit_chance)
 	get_node("%EnemyCrit").text = str(combat_data.target_unit.crit_chance)
+	evaluation.text = str(combat_data.initiating_unit.evaluation_score)
 	
 	_format_attack_value(combat_data)
 	_format_progress_bars(combat_data)
@@ -391,11 +411,11 @@ func _format_progress_bars(data : Combat_Data):
 	var target_atk_multiplier = 1
 	
 	if data.initiating_unit.unit.team == 0:
-		color_init = player_color
-		color_target = enemy_color
+		color_init = player_1_color
+		color_target = player_2_color
 	else:
-		color_init = enemy_color
-		color_target = player_color
+		color_init = player_2_color
+		color_target = player_1_color
 		
 	if data.initiating_unit.follow_up == true:
 		initiating_atk_multiplier = 2
